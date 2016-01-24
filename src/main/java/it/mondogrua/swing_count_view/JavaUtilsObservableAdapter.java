@@ -17,9 +17,9 @@ public class JavaUtilsObservableAdapter extends Observable implements Observable
 	}
 
 	@Override
-	public void notify(String attribute) {
+	public void notifyObservers() {
         setChanged();
-        notifyObservers(attribute);
+        notifyObservers(GET_VALUE_METHOD);
         clearChanged();
 	}
 

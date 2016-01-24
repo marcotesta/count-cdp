@@ -58,7 +58,7 @@ public class ObservableCount implements Count {
 	
 	private void notifyObservers() {
 		for(ObservableAdapter observable : observables) {
-			observable.notify("getValue");
+			observable.notifyObservers();
 		}
 	}
 }

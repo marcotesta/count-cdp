@@ -17,7 +17,7 @@ public class PropertyObservableAdapter extends SimpleStringProperty implements O
 	}
 
 	@Override
-	public void notify(String attribute) {
+	public void notifyObservers() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
