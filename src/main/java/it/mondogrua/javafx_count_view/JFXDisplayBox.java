@@ -9,10 +9,10 @@ public class JFXDisplayBox extends Label  {
 
     private final SimpleStringProperty observer;
 
-    public JFXDisplayBox(SimpleStringProperty count) {
+    public JFXDisplayBox(SimpleStringProperty property) {
         this.observer = new SimpleStringProperty();
         textProperty().bind(Bindings.convert(observer));
-        observer.bind(count);
+        observer.bind(property);
     }
 
 }

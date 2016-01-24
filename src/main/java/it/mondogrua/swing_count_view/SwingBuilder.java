@@ -1,32 +1,38 @@
 package it.mondogrua.swing_count_view;
 
+import static it.mondogrua.count.Count.DECREMENT_METHOD;
+import static it.mondogrua.count.Count.INCREMENT_METHOD;
+import static it.mondogrua.count.Count.RESET_METHOD;
+import static it.mondogrua.swing_count_view.JavaUtilsObservableAdapter.GET_VALUE_METHOD;
+
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import it.mondogrua.count.Count;
 import it.mondogrua.countapp.Builder;
 import it.mondogrua.utils.PluggableAdaptor;
-import it.mondogrua.utils.ValueModel;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
 public class SwingBuilder implements Builder {
 
-    private JPanel panel;
+	private JPanel panel;
 	private JavaUtilsObservableAdapter observable;
-	private ValueModel count;
+	private Count count;
 
-	public SwingBuilder(ValueModel aCount, JavaUtilsObservableAdapter observable) {
+	public SwingBuilder(Count aCount, JavaUtilsObservableAdapter aObservable) {
 		super();
-		count = aCount;
-		this.observable = observable;
+		this.count = aCount;
+		this.observable = aObservable;
 	}
 
 	public void addPane() {
@@ -36,22 +42,22 @@ public class SwingBuilder implements Builder {
     
 	@Override
     public void addDisplayBoxOn(int x, int y) {
-        add(makeDisplayBoxOn(observable, "getValue"), x, y);
+        add(makeDisplayBoxOn(observable, GET_VALUE_METHOD), x, y);
     }
 
 	@Override
 	public void addResetButtonOn(int x, int y) {
-        add(makeButtonOn(count, "Reset", "reset"), x, y);
+        add(makeButtonOn(count, "Reset", RESET_METHOD), x, y);
     }
 
 	@Override
     public void addDecrementButtonOn(int x, int y) {
-        add(makeButtonOn(count, "Decrement", "decrement"), x, y);
+        add(makeButtonOn(count, "Decrement", DECREMENT_METHOD), x, y);
     }
 
 	@Override
     public void addIncrementButtonOn(int x, int y) {
-        add(makeButtonOn(count, "Increment", "increment"), x, y);
+        add(makeButtonOn(count, "Increment", INCREMENT_METHOD), x, y);
     }
     
 	public Scene getScene(int x, int y) {
@@ -65,21 +71,21 @@ public class SwingBuilder implements Builder {
         return new Scene(pane, x, y);
 	}
 
-    private JButton makeButtonOn(final ValueModel count, String label, String action) {
+    private JButton makeButtonOn(Object aModel, String label, String anAction) {
         JButton button = new JButton(label);
         button.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent event) {
-                new PluggableAdaptor(count , action, new Object[]{}).execute();
+                new PluggableAdaptor(aModel, anAction, new Object[]{}).execute();
             }
         });
 
         return button;
     }
 
-    private DisplayBox makeDisplayBoxOn(final JavaUtilsObservableAdapter count, String action) {
-        return new DisplayBox(count, action);
+    private DisplayBox makeDisplayBoxOn(Observable observable, String action) {
+        return new DisplayBox(observable, action);
     }
 
     private GridBagConstraints makeConstraintFrame(int x, int y) {
@@ -93,5 +99,4 @@ public class SwingBuilder implements Builder {
 	private void add(JComponent node, int x, int y) {
 		panel.add(node, makeConstraintFrame(x, y));
     }
-
 }

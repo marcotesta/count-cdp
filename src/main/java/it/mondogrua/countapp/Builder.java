@@ -3,6 +3,7 @@ package it.mondogrua.countapp;
 import javafx.scene.Scene;
 
 public interface Builder {
+
 	public void addPane();
     public void addDisplayBoxOn(int x, int y) ;
     public void addResetButtonOn(int x, int y) ;

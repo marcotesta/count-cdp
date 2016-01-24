@@ -3,16 +3,17 @@ package it.mondogrua.swing_count_view;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 @SuppressWarnings("serial")
-public class DisplayBox extends JLabel implements java.util.Observer {
+public class DisplayBox extends JLabel implements Observer {
 
-    public DisplayBox(JavaUtilsObservableAdapter count, String action) {
-        count.addObserver(this);
-        update(count, action);
+    public DisplayBox(Observable aObservable, String action) {
+        aObservable.addObserver(this);
+        update(aObservable, action);
     }
 
     @Override  // java.util.Observer
@@ -51,6 +52,4 @@ public class DisplayBox extends JLabel implements java.util.Observer {
         }
         return "";
     }
-
-
 }

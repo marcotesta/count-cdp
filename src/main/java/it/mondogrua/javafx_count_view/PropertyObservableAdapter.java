@@ -33,5 +33,4 @@ public class PropertyObservableAdapter extends SimpleStringProperty implements O
     public void addObserver(SimpleStringProperty propertyObserver) {
         propertyObserver.bind(this);
     }
-
 }

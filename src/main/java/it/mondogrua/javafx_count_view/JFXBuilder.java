@@ -1,8 +1,12 @@
 package it.mondogrua.javafx_count_view;
 
+import static it.mondogrua.count.Count.DECREMENT_METHOD;
+import static it.mondogrua.count.Count.INCREMENT_METHOD;
+import static it.mondogrua.count.Count.RESET_METHOD;
+
+import it.mondogrua.count.Count;
 import it.mondogrua.countapp.Builder;
 import it.mondogrua.utils.PluggableAdaptor;
-import it.mondogrua.utils.ValueModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -11,13 +15,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class JFXBuilder implements Builder {
-
+	
 	private GridPane pane;
 	private PropertyObservableAdapter observable;
-	private ValueModel count;
+	private Count count;
 
-	public JFXBuilder(ValueModel count, PropertyObservableAdapter aObservable) {
-		this.count = count;
+	public JFXBuilder(Count aCount, PropertyObservableAdapter aObservable) {
+		this.count = aCount;
 		this.observable = aObservable;
 	}
 
@@ -32,17 +36,17 @@ public class JFXBuilder implements Builder {
 
     @Override
     public void addResetButtonOn(int x, int y) {
-        add(makeButtonOn(count, "Reset", "reset"), x, y);
+        add(makeButtonOn(count, "Reset", RESET_METHOD), x, y);
     }
 
     @Override
 	public void addDecrementButtonOn(int x, int y) {
-        add(makeButtonOn(count, "Decrement", "decrement"), x, y);
+        add(makeButtonOn(count, "Decrement", DECREMENT_METHOD), x, y);
     }
 
     @Override
 	public void addIncrementButtonOn(int x, int y) {
-        add(makeButtonOn(count, "Increment", "increment"), x, y);
+        add(makeButtonOn(count, "Increment", INCREMENT_METHOD), x, y);
     }
 
 	public Scene getScene(int x, int y) {
@@ -57,12 +61,12 @@ public class JFXBuilder implements Builder {
     	pane.setPadding(new Insets(25, 25, 25, 25));
 	}
 
-	protected Button makeButtonOn(final ValueModel count, String label, String action) {
-        return new Button(label, new PluggableAdaptor(count , action, new Object[]{}));
+	protected Button makeButtonOn(Object aModel, String label, String anAction) {
+        return new Button(label, new PluggableAdaptor(aModel , anAction, new Object[]{}));
     }
 
-    protected Label makeDisplayBoxOn(final PropertyObservableAdapter count) {
-        return new JFXDisplayBox(count);
+    protected Label makeDisplayBoxOn(PropertyObservableAdapter observable) {
+        return new JFXDisplayBox(observable);
     }
 
 	private void add(Node node, int x, int y) {

@@ -8,7 +8,7 @@ public class AltDisplayBox extends Label {
 	
     private final ChangeListener<? super String> observer;
 
-    public AltDisplayBox(PropertyObservableAdapter count) {
+    public AltDisplayBox(PropertyObservableAdapter observable) {
     	observer = new ChangeListener<Object>() {
     		@Override
     		public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
@@ -17,7 +17,7 @@ public class AltDisplayBox extends Label {
     		}
     	};
 
-    	count.addObserver(observer);
-		setText(count.getValueSafe());
+    	observable.addObserver(observer);
+		setText(observable.getValueSafe());
     }
 }
