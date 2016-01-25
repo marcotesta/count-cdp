@@ -1,4 +1,4 @@
-package it.mondogrua.javafx_count_view;
+package it.mondogrua.javafx;
 
 import it.mondogrua.utils.PluggableAdaptor;
 import javafx.event.ActionEvent;

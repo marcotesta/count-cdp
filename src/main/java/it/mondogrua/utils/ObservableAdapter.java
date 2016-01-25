@@ -1,4 +1,4 @@
-package it.mondogrua.count;
+package it.mondogrua.utils;
 
 public interface ObservableAdapter {
 

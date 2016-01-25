@@ -1,5 +1,6 @@
-package it.mondogrua.javafx_count_view;
+package it.mondogrua.javafx;
 
+import it.mondogrua.javafx.PropertyObservableAdapter;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;

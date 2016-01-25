@@ -3,7 +3,7 @@ package it.mondogrua.swing_count_view;
 import static it.mondogrua.count.Count.DECREMENT_METHOD;
 import static it.mondogrua.count.Count.INCREMENT_METHOD;
 import static it.mondogrua.count.Count.RESET_METHOD;
-import static it.mondogrua.swing_count_view.JavaUtilsObservableAdapter.GET_VALUE_METHOD;
+import static it.mondogrua.swing.JavaUtilsObservableAdapter.GET_VALUE_METHOD;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 
 import it.mondogrua.count.Count;
 import it.mondogrua.countapp.Builder;
+import it.mondogrua.swing.DisplayBox;
+import it.mondogrua.swing.JavaUtilsObservableAdapter;
 import it.mondogrua.utils.PluggableAdaptor;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.Scene;

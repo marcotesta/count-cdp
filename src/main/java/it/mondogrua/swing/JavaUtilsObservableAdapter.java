@@ -1,13 +1,13 @@
-package it.mondogrua.swing_count_view;
+package it.mondogrua.swing;
 
 import java.util.Observable;
 
-import it.mondogrua.count.ObservableAdapter;
+import it.mondogrua.utils.ObservableAdapter;
 import it.mondogrua.utils.ValueModel;
 
 public class JavaUtilsObservableAdapter extends Observable implements ObservableAdapter {
 
-    static final String GET_VALUE_METHOD = "getValue";
+    public static final String GET_VALUE_METHOD = "getValue";
 
     private final ValueModel value;
 

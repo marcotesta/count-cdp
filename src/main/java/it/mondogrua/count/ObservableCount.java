@@ -3,6 +3,8 @@ package it.mondogrua.count;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.mondogrua.utils.ObservableAdapter;
+
 public class ObservableCount implements Count {
 
 	private Count count;

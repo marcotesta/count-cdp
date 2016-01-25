@@ -6,6 +6,9 @@ import static it.mondogrua.count.Count.RESET_METHOD;
 
 import it.mondogrua.count.Count;
 import it.mondogrua.countapp.Builder;
+import it.mondogrua.javafx.Button;
+import it.mondogrua.javafx.JFXDisplayBox;
+import it.mondogrua.javafx.PropertyObservableAdapter;
 import it.mondogrua.utils.PluggableAdaptor;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

@@ -1,4 +1,4 @@
-package it.mondogrua.swing_count_view;
+package it.mondogrua.swing;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

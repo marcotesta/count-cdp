@@ -1,6 +1,6 @@
-package it.mondogrua.javafx_count_view;
+package it.mondogrua.javafx;
 
-import it.mondogrua.count.ObservableAdapter;
+import it.mondogrua.utils.ObservableAdapter;
 import it.mondogrua.utils.ValueModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
