@@ -3,7 +3,7 @@ package it.mondogrua.swing_count_view;
 import static it.mondogrua.count.Count.DECREMENT_METHOD;
 import static it.mondogrua.count.Count.INCREMENT_METHOD;
 import static it.mondogrua.count.Count.RESET_METHOD;
-import static it.mondogrua.swing.JavaUtilsObservableAdapter.GET_VALUE_METHOD;
+import static it.mondogrua.utils.ValueModel.GET_VALUE_METHOD;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,10 +16,9 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import it.mondogrua.count.Count;
 import it.mondogrua.countapp.Builder;
 import it.mondogrua.swing.DisplayBox;
-import it.mondogrua.swing.JavaUtilsObservableAdapter;
+import it.mondogrua.swing.JavaUtilsObservableValueModelObserver;
 import it.mondogrua.utils.PluggableAdaptor;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.Scene;
@@ -28,12 +27,11 @@ import javafx.scene.layout.StackPane;
 public class SwingBuilder implements Builder {
 
 	private JPanel panel;
-	private JavaUtilsObservableAdapter observable;
-	private Count count;
+	private JavaUtilsObservableValueModelObserver observable;
+	private Scene scene;
 
-	public SwingBuilder(Count aCount, JavaUtilsObservableAdapter aObservable) {
+	public SwingBuilder(JavaUtilsObservableValueModelObserver aObservable) {
 		super();
-		this.count = aCount;
 		this.observable = aObservable;
 	}
 
@@ -49,28 +47,33 @@ public class SwingBuilder implements Builder {
 
 	@Override
 	public void addResetButtonOn(int x, int y) {
-        add(makeButtonOn(count, "Reset", RESET_METHOD), x, y);
+        add(makeButtonOn(observable, "Reset", RESET_METHOD), x, y);
     }
 
 	@Override
     public void addDecrementButtonOn(int x, int y) {
-        add(makeButtonOn(count, "Decrement", DECREMENT_METHOD), x, y);
+        add(makeButtonOn(observable, "Decrement", DECREMENT_METHOD), x, y);
     }
 
 	@Override
     public void addIncrementButtonOn(int x, int y) {
-        add(makeButtonOn(count, "Increment", INCREMENT_METHOD), x, y);
+        add(makeButtonOn(observable, "Increment", INCREMENT_METHOD), x, y);
     }
-    
-	public Scene getScene(int x, int y) {
+	
+	@Override
+	public void addScene(int x, int y) {
 
         final SwingNode swingNode = new SwingNode();
         swingNode.setContent(panel);
 
         StackPane pane = new StackPane();
         pane.getChildren().add(swingNode);
+		scene = new Scene(pane, x, y);
+	}
 
-        return new Scene(pane, x, y);
+    @Override
+	public Scene getScene() {
+		return scene;
 	}
 
     private JButton makeButtonOn(Object aModel, String label, String anAction) {

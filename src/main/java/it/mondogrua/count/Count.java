@@ -19,9 +19,7 @@ public interface Count extends ValueModel {
 
 	void decrement();
 	
-	public Object getValue() ;
+	public Object getModelValue() ;
 
-	public void setValue(Object aValue);
-
-
+	void setModelValue(Object aValue);
 }

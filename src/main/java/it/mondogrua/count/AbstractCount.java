@@ -14,12 +14,12 @@ public abstract class AbstractCount implements Count {
     }
 
 	@Override
-    public Object getValue() {
+    public Object getModelValue() {
         return _value;
     }
 
 	@Override
-	public void setValue(Object aValue) {
+	public void setModelValue(Object aValue) {
         _value = aValue;
     }
 
@@ -35,7 +35,7 @@ public abstract class AbstractCount implements Count {
 
     @Override
 	public void reset() {
-        setValue(_resetValue);
+        setModelValue(_resetValue);
     }
 
     @Override

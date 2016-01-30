@@ -6,11 +6,8 @@ import java.lang.reflect.Method;
 public class PluggableAdaptor {
 
     private final Object model;
-
     private final String action;
-
     private final Object[] parameters;
-
 
     public PluggableAdaptor(Object aModel, String anAction, Object[] someParameters) {
         this.model = aModel;
@@ -40,7 +37,5 @@ public class PluggableAdaptor {
             // ...
             return null;
         }
-
     }
-
 }

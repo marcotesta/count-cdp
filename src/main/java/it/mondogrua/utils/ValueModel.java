@@ -2,8 +2,8 @@ package it.mondogrua.utils;
 
 public interface ValueModel {
 
-	Object getValue();
+    public static final String GET_VALUE_METHOD = "getModelValue";
 
-	void setValue(Object aValue);
-
+	public Object getModelValue();
+	public void setModelValue(Object aValue);
 }

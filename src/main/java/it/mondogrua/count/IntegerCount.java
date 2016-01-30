@@ -15,12 +15,12 @@ public class IntegerCount extends AbstractCount {
 
     @Override
     public void increment() {
-        setValue((Integer)getValue() + 1);
+        setModelValue((Integer)getModelValue() + 1);
     }
 
     @Override
     public void decrement() {
-        setValue((Integer)getValue() - 1);
+        setModelValue((Integer)getModelValue() - 1);
     }
 
 }

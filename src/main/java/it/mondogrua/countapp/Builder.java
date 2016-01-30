@@ -9,5 +9,6 @@ public interface Builder {
     public void addResetButtonOn(int x, int y) ;
     public void addDecrementButtonOn(int x, int y) ;
     public void addIncrementButtonOn(int x, int y) ;
-	public Scene getScene(int x, int y);
+    public void addScene(int x, int y);
+	public Scene getScene();
 }
