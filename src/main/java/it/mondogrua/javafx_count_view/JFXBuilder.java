@@ -7,7 +7,7 @@ import static it.mondogrua.count.Count.RESET_METHOD;
 import it.mondogrua.countapp.Builder;
 import it.mondogrua.javafx.Button;
 import it.mondogrua.javafx.JFXDisplayBox;
-import it.mondogrua.javafx.PropertyObservableValueModelObserver;
+import it.mondogrua.javafx.PropertyObservableObserverCount;
 import it.mondogrua.utils.PluggableAdaptor;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,10 +19,10 @@ import javafx.scene.layout.GridPane;
 public class JFXBuilder implements Builder {
 	
 	private GridPane pane;
-	private PropertyObservableValueModelObserver observable;
+	private PropertyObservableObserverCount observable;
 	private Scene scene;
 
-	public JFXBuilder(PropertyObservableValueModelObserver aObservable) {
+	public JFXBuilder(PropertyObservableObserverCount aObservable) {
 		this.observable = aObservable;
 	}
 
@@ -72,7 +72,7 @@ public class JFXBuilder implements Builder {
         return new Button(label, new PluggableAdaptor(aModel , anAction, new Object[]{}));
     }
 
-    protected Label makeDisplayBoxOn(PropertyObservableValueModelObserver observable) {
+    protected Label makeDisplayBoxOn(PropertyObservableObserverCount observable) {
         return new JFXDisplayBox(observable);
     }
 

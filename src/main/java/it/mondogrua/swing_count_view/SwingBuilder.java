@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 
 import it.mondogrua.countapp.Builder;
 import it.mondogrua.swing.DisplayBox;
-import it.mondogrua.swing.JavaUtilsObservableValueModelObserver;
+import it.mondogrua.swing.JavaUtilsObservableObserverCount;
 import it.mondogrua.utils.PluggableAdaptor;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.Scene;
@@ -27,12 +27,12 @@ import javafx.scene.layout.StackPane;
 public class SwingBuilder implements Builder {
 
 	private JPanel panel;
-	private JavaUtilsObservableValueModelObserver observable;
+	private JavaUtilsObservableObserverCount count;
 	private Scene scene;
 
-	public SwingBuilder(JavaUtilsObservableValueModelObserver aObservable) {
+	public SwingBuilder(JavaUtilsObservableObserverCount aCount) {
 		super();
-		this.observable = aObservable;
+		this.count = aCount;
 	}
 
 	public void addPane() {
@@ -42,22 +42,22 @@ public class SwingBuilder implements Builder {
     
 	@Override
     public void addDisplayBoxOn(int x, int y) {
-        add(makeDisplayBoxOn(observable, GET_VALUE_METHOD), x, y);
+        add(makeDisplayBoxOn(count, GET_VALUE_METHOD), x, y);
     }
 
 	@Override
 	public void addResetButtonOn(int x, int y) {
-        add(makeButtonOn(observable, "Reset", RESET_METHOD), x, y);
+        add(makeButtonOn(count, "Reset", RESET_METHOD), x, y);
     }
 
 	@Override
     public void addDecrementButtonOn(int x, int y) {
-        add(makeButtonOn(observable, "Decrement", DECREMENT_METHOD), x, y);
+        add(makeButtonOn(count, "Decrement", DECREMENT_METHOD), x, y);
     }
 
 	@Override
     public void addIncrementButtonOn(int x, int y) {
-        add(makeButtonOn(observable, "Increment", INCREMENT_METHOD), x, y);
+        add(makeButtonOn(count, "Increment", INCREMENT_METHOD), x, y);
     }
 	
 	@Override

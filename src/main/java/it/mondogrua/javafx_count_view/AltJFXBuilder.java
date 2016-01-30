@@ -1,17 +1,17 @@
 package it.mondogrua.javafx_count_view;
 
 import it.mondogrua.javafx.AltDisplayBox;
-import it.mondogrua.javafx.PropertyObservableValueModelObserver;
+import it.mondogrua.javafx.PropertyObservableObserverCount;
 import javafx.scene.control.Label;
 
 public class AltJFXBuilder extends JFXBuilder {
 
-    public AltJFXBuilder(PropertyObservableValueModelObserver aObservable) {
+    public AltJFXBuilder(PropertyObservableObserverCount aObservable) {
 		super(aObservable);
 	}
 
 	@Override
-    protected Label makeDisplayBoxOn(PropertyObservableValueModelObserver observable) {
+    protected Label makeDisplayBoxOn(PropertyObservableObserverCount observable) {
         return new AltDisplayBox(observable);
     }
 }
