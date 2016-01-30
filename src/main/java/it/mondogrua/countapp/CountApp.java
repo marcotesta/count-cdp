@@ -26,12 +26,12 @@ public class CountApp extends Application {
 		
         count.addCountObserver(new PrintStreamObserver(System.out ));
 
-        createCountViewContainer(primaryStage, "JavaFX DateCount Example", new JFXBuilder(propertyObservableObserver), 100, 500);
-        createCountViewContainer(new Stage(), "Alternative JavaFX DateCount Example", new AltJFXBuilder(propertyObservableObserver), 500, 500);
-        createCountViewContainer(new Stage(), "SWING DateCount Example", new SwingBuilder(javaUtilsObservableObserver), 900, 500);
+        setupStage(primaryStage, "JavaFX DateCount Example", new JFXBuilder(propertyObservableObserver), 100, 500);
+        setupStage(new Stage(), "Alternative JavaFX DateCount Example", new AltJFXBuilder(propertyObservableObserver), 500, 500);
+        setupStage(new Stage(), "SWING DateCount Example", new SwingBuilder(javaUtilsObservableObserver), 900, 500);
     }
 
-    private void createCountViewContainer(Stage stage, String lable, Builder builder, double x, double y) {
+    private void setupStage(Stage stage, String lable, Builder builder, double x, double y) {
     	stage.setScene(createScene(builder));
     	stage.setX(x);
     	stage.setY(y);
