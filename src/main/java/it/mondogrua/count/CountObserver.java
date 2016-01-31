@@ -1,6 +1,4 @@
-package it.mondogrua.utils;
-
-import it.mondogrua.count.Count;
+package it.mondogrua.count;
 
 public interface CountObserver {
 	public void update();

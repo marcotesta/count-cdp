@@ -3,7 +3,7 @@ package it.mondogrua.swing_count_view;
 import static it.mondogrua.count.Count.DECREMENT_METHOD;
 import static it.mondogrua.count.Count.INCREMENT_METHOD;
 import static it.mondogrua.count.Count.RESET_METHOD;
-import static it.mondogrua.utils.ValueModel.GET_VALUE_METHOD;
+import static it.mondogrua.count.Count.GET_VALUE_METHOD;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 
 import it.mondogrua.countapp.Builder;
 import it.mondogrua.swing.DisplayBox;
-import it.mondogrua.swing.JavaUtilsObservableObserverCount;
 import it.mondogrua.utils.PluggableAdaptor;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.Scene;
@@ -27,10 +26,10 @@ import javafx.scene.layout.StackPane;
 public class SwingBuilder implements Builder {
 
 	private JPanel panel;
-	private JavaUtilsObservableObserverCount count;
+	private ObservableCountAdapter count;
 	private Scene scene;
 
-	public SwingBuilder(JavaUtilsObservableObserverCount aCount) {
+	public SwingBuilder(ObservableCountAdapter aCount) {
 		super();
 		this.count = aCount;
 	}

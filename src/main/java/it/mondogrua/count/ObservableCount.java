@@ -3,14 +3,12 @@ package it.mondogrua.count;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.mondogrua.utils.CountObserver;
-
-public class ObservableCountDecorator implements Count {
+public class ObservableCount implements Count {
 
 	private Count count;
 	private final List<CountObserver> observers = new ArrayList<>();
 	
-	public ObservableCountDecorator(Count count) {
+	public ObservableCount(Count count) {
 		super();
 		this.count = count;
 	}
@@ -21,24 +19,8 @@ public class ObservableCountDecorator implements Count {
 	}
 	
 	@Override
-	public Object getModelValue() {
-		return count.getModelValue();
-	}
-
-	@Override
-	public void setModelValue(Object aValue) {
-		count.setModelValue(aValue);
-		notifyObservers();
-	}
-
-	@Override
-	public Object getResetValue() {
-		return count.getResetValue();
-	}
-
-	@Override
-	public void setResetValue(Object aResetValue) {
-		count.setResetValue(aResetValue);
+	public Object getCountValue() {
+		return count.getCountValue();
 	}
 
 	@Override

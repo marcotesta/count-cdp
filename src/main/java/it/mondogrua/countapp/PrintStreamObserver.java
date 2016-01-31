@@ -3,7 +3,7 @@ package it.mondogrua.countapp;
 import java.io.PrintStream;
 
 import it.mondogrua.count.Count;
-import it.mondogrua.utils.CountObserver;
+import it.mondogrua.count.CountObserver;
 
 public class PrintStreamObserver implements CountObserver {
 	private Count count;
@@ -28,6 +28,6 @@ public class PrintStreamObserver implements CountObserver {
 	}
 
 	private String retrieveValue() {
-		return this.count.getModelValue().toString();
+		return this.count.getCountValue().toString();
 	}
 }

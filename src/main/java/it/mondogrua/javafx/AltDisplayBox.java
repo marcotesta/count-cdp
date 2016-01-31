@@ -1,6 +1,6 @@
 package it.mondogrua.javafx;
 
-import it.mondogrua.javafx.PropertyObservableObserverCount;
+import it.mondogrua.javafx_count_view.PropertyCountAdapter;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
@@ -9,7 +9,7 @@ public class AltDisplayBox extends Label {
 	
     private final ChangeListener<? super String> observer;
 
-    public AltDisplayBox(PropertyObservableObserverCount observable) {
+    public AltDisplayBox(PropertyCountAdapter observable) {
     	observer = new ChangeListener<Object>() {
     		@Override
     		public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {

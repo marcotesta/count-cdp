@@ -1,11 +1,11 @@
 package it.mondogrua.countapp;
 
 import it.mondogrua.count.DateCount;
-import it.mondogrua.count.ObservableCountDecorator;
-import it.mondogrua.javafx.PropertyObservableObserverCount;
+import it.mondogrua.count.ObservableCount;
 import it.mondogrua.javafx_count_view.AltJFXBuilder;
 import it.mondogrua.javafx_count_view.JFXBuilder;
-import it.mondogrua.swing.JavaUtilsObservableObserverCount;
+import it.mondogrua.javafx_count_view.PropertyCountAdapter;
+import it.mondogrua.swing_count_view.ObservableCountAdapter;
 import it.mondogrua.swing_count_view.SwingBuilder;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -19,19 +19,24 @@ public class CountApp extends Application {
     }
 
 	private void configureCountApp(Stage primaryStage) {
-		ObservableCountDecorator count = new ObservableCountDecorator(new DateCount());
+		ObservableCount count = new ObservableCount(new DateCount());
         
-        JavaUtilsObservableObserverCount javaUtilsObservableObserver = new JavaUtilsObservableObserverCount();
-		count.addCountObserver(javaUtilsObservableObserver);
+        ObservableCountAdapter observableCountAdapter = 
+        		new ObservableCountAdapter();
+		count.addCountObserver(observableCountAdapter);
 		
-        PropertyObservableObserverCount propertyObservableObserver = new PropertyObservableObserverCount();
-		count.addCountObserver(propertyObservableObserver);
+        PropertyCountAdapter propertyCountAdapter = 
+        		new PropertyCountAdapter();
+		count.addCountObserver(propertyCountAdapter);
 		
         count.addCountObserver(new PrintStreamObserver(System.out ));
 
-        setupStage(primaryStage, "JavaFX DateCount Example", new JFXBuilder(propertyObservableObserver), 100, 500);
-        setupStage(new Stage(), "Alternative JavaFX DateCount Example", new AltJFXBuilder(propertyObservableObserver), 500, 500);
-        setupStage(new Stage(), "SWING DateCount Example", new SwingBuilder(javaUtilsObservableObserver), 900, 500);
+        setupStage(primaryStage, "JavaFX DateCount Example", 
+        		new JFXBuilder(propertyCountAdapter), 100, 500);
+        setupStage(new Stage(), "Alternative JavaFX DateCount Example", 
+        		new AltJFXBuilder(propertyCountAdapter), 500, 500);
+        setupStage(new Stage(), "SWING DateCount Example", 
+        		new SwingBuilder(observableCountAdapter), 900, 500);
 	}
 
     private void setupStage(Stage stage, String lable, Builder builder, double x, double y) {
@@ -45,8 +50,7 @@ public class CountApp extends Application {
 	private Scene createScene(Builder builder) {
 		CountViewContainerDirector director = new CountViewContainerDirector(builder);
     	director.construct();
-        Scene scene = builder.getScene();
-		return scene;
+        return builder.getScene();
 	}
 
     public static void main(String[] args) {

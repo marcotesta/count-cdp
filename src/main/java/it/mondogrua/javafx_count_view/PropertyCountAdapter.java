@@ -1,16 +1,16 @@
-package it.mondogrua.javafx;
+package it.mondogrua.javafx_count_view;
 
 import it.mondogrua.count.Count;
-import it.mondogrua.utils.CountObserver;
+import it.mondogrua.count.CountObserver;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 
-public class PropertyObservableObserverCount extends SimpleStringProperty implements CountObserver, Count {
+public class PropertyCountAdapter extends SimpleStringProperty implements CountObserver, Count {
 
 	private Count count;
 
-	public PropertyObservableObserverCount() {
+	public PropertyCountAdapter() {
 		super();
         set("");
 	}
@@ -40,17 +40,6 @@ public class PropertyObservableObserverCount extends SimpleStringProperty implem
     }
 
 	@Override
-	public Object getResetValue() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setResetValue(Object aResetValue) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public void reset() {
 		count.reset();
 	}
@@ -66,16 +55,11 @@ public class PropertyObservableObserverCount extends SimpleStringProperty implem
 	}
 
 	@Override
-	public void setModelValue(Object aValue) {
-		setValue(aValue.toString());
-	}
-
-	@Override
-	public Object getModelValue() {
+	public Object getCountValue() {
 		return getValue();
 	}
-    
-    private String retrieveValue() {
-		return count.getModelValue().toString();
+
+	private String retrieveValue() {
+		return count.getCountValue().toString();
 	}
 }
