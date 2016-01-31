@@ -8,7 +8,7 @@ public class CountViewContainerDirector {
 		this.builder = builder;
 	}
 
-    public void construct() {
+    public void constructCountViewContainer() {
     	builder.addPane();
     	builder.addDisplayBoxOn(1, 1);
     	builder.addIncrementButtonOn(0, 2);

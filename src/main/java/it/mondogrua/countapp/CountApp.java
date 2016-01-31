@@ -21,15 +21,14 @@ public class CountApp extends Application {
 	private void configureCountApp(Stage primaryStage) {
 		ObservableCount count = new ObservableCount(new DateCount());
         
-        ObservableCountAdapter observableCountAdapter = 
-        		new ObservableCountAdapter();
+        ObservableCountAdapter observableCountAdapter = new ObservableCountAdapter();
 		count.addCountObserver(observableCountAdapter);
 		
-        PropertyCountAdapter propertyCountAdapter = 
-        		new PropertyCountAdapter();
+        PropertyCountAdapter propertyCountAdapter = new PropertyCountAdapter();
 		count.addCountObserver(propertyCountAdapter);
 		
-        count.addCountObserver(new PrintStreamObserver(System.out ));
+        PrintStreamObserver printStreamObserver = new PrintStreamObserver(System.out );
+		count.addCountObserver(printStreamObserver);
 
         setupStage(primaryStage, "JavaFX DateCount Example", 
         		new JFXBuilder(propertyCountAdapter), 100, 500);
@@ -48,8 +47,7 @@ public class CountApp extends Application {
     }
 
 	private Scene createScene(Builder builder) {
-		CountViewContainerDirector director = new CountViewContainerDirector(builder);
-    	director.construct();
+		new CountViewContainerDirector(builder).constructCountViewContainer();
         return builder.getScene();
 	}
 
