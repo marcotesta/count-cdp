@@ -1,6 +1,7 @@
 package it.mondogrua.countapp;
 
-import it.mondogrua.console.ConsoleCountView;
+import it.mondogrua.console.DisplayStream;
+import it.mondogrua.console.StreamListener;
 import it.mondogrua.count.DateCount;
 import it.mondogrua.count.ObservableCount;
 import it.mondogrua.javafx_count_view.AltJFXBuilder;
@@ -30,8 +31,10 @@ public class CountApp extends Application {
                 new PropertyCountObserverObservableAdapter();
         count.addCountObserver(propertyCountAdapter);
 
-        ConsoleCountView printStreamObserver = new ConsoleCountView(System.out);
-        count.addCountObserver(printStreamObserver);
+        StreamListener streamListener = new StreamListener(propertyCountAdapter,
+                System.in);
+        DisplayStream displayStream = new DisplayStream(System.out);
+        count.addCountObserver(displayStream);
 
         setupStage(primaryStage, "JavaFX DateCount Example", new JFXBuilder(
                 propertyCountAdapter), 100, 500);
