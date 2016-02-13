@@ -16,7 +16,7 @@ public class DisplayBox extends JLabel implements Observer {
         update(aObservable, action);
     }
 
-    @Override // java.util.Observer
+    @Override
     public void update(Observable observable, Object action) {
         setContent(getContentFrom(observable, (String) action));
     }
@@ -34,7 +34,6 @@ public class DisplayBox extends JLabel implements Observer {
     }
 
     private String getContentFrom(Object model, String action) {
-
         return new PluggableAdaptor(model, action, new Object[] {}).execute()
                 .toString();
     }
