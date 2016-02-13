@@ -38,16 +38,11 @@ public class PrintStreamObserver implements CountObserver {
 	}
 	
 	private class KeyReader implements Runnable {
-
 		@Override
 		public void run() {
-			read();
-		}
-		private void read() {
-			Reader entrada = new InputStreamReader(System.in);
 			try {
-				boolean stop = false;
-				while (!stop) {
+				Reader entrada = new InputStreamReader(System.in);
+				while (!false) {
 					char c = (char)entrada.read();
 					if (c == 'r') {
 						count.reset();
