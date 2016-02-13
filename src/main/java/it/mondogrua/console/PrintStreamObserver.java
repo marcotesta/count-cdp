@@ -1,4 +1,4 @@
-package it.mondogrua.countapp;
+package it.mondogrua.console;
 
 import java.io.PrintStream;
 

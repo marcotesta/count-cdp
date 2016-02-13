@@ -1,5 +1,6 @@
 package it.mondogrua.countapp;
 
+import it.mondogrua.console.PrintStreamObserver;
 import it.mondogrua.count.DateCount;
 import it.mondogrua.count.ObservableCount;
 import it.mondogrua.javafx_count_view.AltJFXBuilder;
