@@ -16,22 +16,23 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class JFXBuilder implements Builder {
-	
-	private GridPane pane;
-	private PropertyCountObserverObservableAdapter observable;
-	private Scene scene;
 
-	public JFXBuilder(PropertyCountObserverObservableAdapter aObservable) {
-		this.observable = aObservable;
-	}
+    private GridPane pane;
+    private PropertyCountObserverObservableAdapter observable;
+    private Scene scene;
 
-	public void addPane() {
-		makePane();
-	}
+    public JFXBuilder(PropertyCountObserverObservableAdapter aObservable) {
+        this.observable = aObservable;
+    }
 
-	@Override
+    @Override
+    public void addPane() {
+        makePane();
+    }
+
+    @Override
     public void addDisplayBoxOn(int x, int y) {
-    	add(makeDisplayBoxOn(observable), x, y);
+        add(makeDisplayBoxOn(observable), x, y);
     }
 
     @Override
@@ -40,42 +41,42 @@ public class JFXBuilder implements Builder {
     }
 
     @Override
-	public void addDecrementButtonOn(int x, int y) {
+    public void addDecrementButtonOn(int x, int y) {
         add(makeButtonOn(observable, "Decrement", DECREMENT_METHOD), x, y);
     }
 
     @Override
-	public void addIncrementButtonOn(int x, int y) {
+    public void addIncrementButtonOn(int x, int y) {
         add(makeButtonOn(observable, "Increment", INCREMENT_METHOD), x, y);
     }
 
-	@Override
-	public void addScene(int x, int y) {
-		scene = new Scene(pane, x, y);
-	}
+    @Override
+    public void addScene(int x, int y) {
+        scene = new Scene(pane, x, y);
+    }
 
-	@Override
-	public Scene getScene() {
+    @Override
+    public Scene getScene() {
         return scene;
-	}
+    }
 
-	protected void makePane() {
-		pane = new GridPane();
-    	pane.setAlignment(Pos.CENTER);
-    	pane.setHgap(10);
-    	pane.setVgap(10);
-    	pane.setPadding(new Insets(25, 25, 25, 25));
-	}
+    protected void makePane() {
+        pane = new GridPane();
+        pane.setAlignment(Pos.CENTER);
+        pane.setHgap(10);
+        pane.setVgap(10);
+        pane.setPadding(new Insets(25, 25, 25, 25));
+    }
 
-	protected Button makeButtonOn(Object aModel, String label, String anAction) {
-        return new Button(label, new PluggableAdaptor(aModel , anAction, new Object[]{}));
+    protected Button makeButtonOn(Object aModel, String label, String anAction) {
+        return new Button(label, new PluggableAdaptor(aModel, anAction, new Object[] {}));
     }
 
     protected Label makeDisplayBoxOn(PropertyCountObserverObservableAdapter observable) {
         return new JFXDisplayBox(observable);
     }
 
-	private void add(Node node, int x, int y) {
-    	pane.add(node, x, y);
+    private void add(Node node, int x, int y) {
+        pane.add(node, x, y);
     }
 }

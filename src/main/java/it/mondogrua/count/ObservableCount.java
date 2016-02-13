@@ -5,45 +5,45 @@ import java.util.List;
 
 public class ObservableCount implements Count {
 
-	private Count count;
-	private final List<CountObserver> observers = new ArrayList<>();
-	
-	public ObservableCount(Count count) {
-		super();
-		this.count = count;
-	}
-	
-	public boolean addCountObserver(CountObserver observer) {
-		observer.setSubject(this);
-		return observers.add(observer);
-	}
-	
-	@Override
-	public Object getCountValue() {
-		return count.getCountValue();
-	}
+    private Count count;
+    private final List<CountObserver> observers = new ArrayList<>();
 
-	@Override
-	public void reset() {
-		count.reset();
-		notifyObservers();
-	}
+    public ObservableCount(Count count) {
+        super();
+        this.count = count;
+    }
 
-	@Override
-	public void increment() {
-		count.increment();
-		notifyObservers();
-	}
+    public boolean addCountObserver(CountObserver observer) {
+        observer.setSubject(this);
+        return observers.add(observer);
+    }
 
-	@Override
-	public void decrement() {
-		count.decrement();
-		notifyObservers();
-	}
-	
-	private void notifyObservers() {
-		for(CountObserver observer : observers) {
-			observer.update();
-		}
-	}
+    @Override
+    public Object getCountValue() {
+        return count.getCountValue();
+    }
+
+    @Override
+    public void reset() {
+        count.reset();
+        notifyObservers();
+    }
+
+    @Override
+    public void increment() {
+        count.increment();
+        notifyObservers();
+    }
+
+    @Override
+    public void decrement() {
+        count.decrement();
+        notifyObservers();
+    }
+
+    private void notifyObservers() {
+        for (CountObserver observer : observers) {
+            observer.update();
+        }
+    }
 }

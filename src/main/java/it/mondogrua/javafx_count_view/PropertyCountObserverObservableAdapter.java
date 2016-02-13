@@ -6,60 +6,62 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 
-public class PropertyCountObserverObservableAdapter extends SimpleStringProperty implements CountObserver, Count {
+public class PropertyCountObserverObservableAdapter extends SimpleStringProperty implements
+        CountObserver, Count {
 
-	private Count count;
+    private Count count;
 
-	public PropertyCountObserverObservableAdapter() {
-		super();
+    public PropertyCountObserverObservableAdapter() {
+        super();
         set("");
-	}
-	
-	@Override
-	public void setSubject(Count aCount) {
-		this.count = aCount;
-		setValue(retrieveValue());
-	}
+    }
 
-	@Override
-	public void update() {
+    @Override
+    public void setSubject(Count aCount) {
+        this.count = aCount;
+        setValue(retrieveValue());
+    }
+
+    @Override
+    public void update() {
         Platform.runLater(new Runnable() {
+
             @Override
             public void run() {
                 setValue(retrieveValue());
             }
-       });
-	}
-	
+        });
+    }
+
     public void addObserver(ChangeListener<? super String> changeListener) {
-    	addListener(changeListener);
-	}
-    
+        addListener(changeListener);
+    }
+
     public void addObserver(SimpleStringProperty propertyObserver) {
         propertyObserver.bind(this);
     }
 
-	@Override
-	public void reset() {
-		count.reset();
-	}
+    @Override
+    public void reset() {
+        count.reset();
+    }
 
-	@Override
-	public void increment() {
-		count.increment();
-	}
+    @Override
+    public void increment() {
+        count.increment();
+    }
 
-	@Override
-	public void decrement() {
-		count.decrement();
-	}
+    @Override
+    public void decrement() {
+        count.decrement();
+    }
 
-	@Override
-	public Object getCountValue() {
-		return getValue();
-	}
+    @Override
+    public Object getCountValue() {
+        return getValue();
+    }
 
-	private String retrieveValue() {
-		return count.getCountValue().toString();
-	}
+    private String retrieveValue() {
+        return count.getCountValue().toString();
+    }
 }

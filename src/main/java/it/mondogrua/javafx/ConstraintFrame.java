@@ -17,5 +17,4 @@ public class ConstraintFrame {
     public int getY() {
         return this.y;
     }
-
 }

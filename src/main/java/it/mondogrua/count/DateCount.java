@@ -14,15 +14,13 @@ public class DateCount extends AbstractCount {
         super.initialize();
     };
 
-
     @Override
     public void increment() {
-        setModelValue(((Date)getCountValue()).addDays(1));
+        setModelValue(((Date) getCountValue()).addDays(1));
     }
 
     @Override
     public void decrement() {
-        setModelValue(((Date)getCountValue()).addDays(-1));
+        setModelValue(((Date) getCountValue()).addDays(-1));
     }
-
 }

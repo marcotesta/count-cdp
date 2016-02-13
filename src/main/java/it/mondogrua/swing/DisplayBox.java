@@ -16,7 +16,7 @@ public class DisplayBox extends JLabel implements Observer {
         update(aObservable, action);
     }
 
-    @Override  // java.util.Observer
+    @Override // java.util.Observer
     public void update(Observable observable, Object action) {
         setContent(getContentFrom(observable, (String) action));
     }
@@ -25,6 +25,7 @@ public class DisplayBox extends JLabel implements Observer {
 
     private void setContent(String value) {
         SwingUtilities.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 setText(value);
@@ -37,7 +38,7 @@ public class DisplayBox extends JLabel implements Observer {
         Method method;
         try {
             method = model.getClass().getMethod(action);
-            Object ret = method.invoke(model, new Object[]{});
+            Object ret = method.invoke(model, new Object[] {});
             return ret.toString();
         } catch (SecurityException e) {
             // ...

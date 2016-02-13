@@ -9,52 +9,55 @@ import it.mondogrua.count.Count;
 import it.mondogrua.count.CountObserver;
 
 public class ConsoleCountView implements CountObserver {
-	private Count count;
-	private PrintStream out;
-	private Thread keyReader;
 
-	public ConsoleCountView(PrintStream out) {
-		this.out = out;
-		this.keyReader = new Thread(new KeyReader());
-		this.keyReader.start();
-	}
-	
-	public void setSubject(Count aCount) {
-		this.count = aCount;
-		printValue();
-	}
+    private Count count;
+    private PrintStream out;
+    private Thread keyReader;
 
-	@Override
-	public void update() {
-		printValue();
-	}
+    public ConsoleCountView(PrintStream out) {
+        this.out = out;
+        this.keyReader = new Thread(new KeyReader());
+        this.keyReader.start();
+    }
 
-	private void printValue() {
-		out.println(retrieveValue());
-	}
+    @Override
+    public void setSubject(Count aCount) {
+        this.count = aCount;
+        printValue();
+    }
 
-	private String retrieveValue() {
-		return this.count.getCountValue().toString();
-	}
-	
-	private class KeyReader implements Runnable {
-		@Override
-		public void run() {
-			try {
-				Reader entrada = new InputStreamReader(System.in);
-				while (!false) {
-					char c = (char)entrada.read();
-					if (c == 'r') {
-						count.reset();
-					} else if (c == '+') {
-						count.increment();
-					} else if (c == '-') {
-						count.decrement();
-					}
-				}
-			} catch(IOException ex){
-				
-			}
-		}
-	}
+    @Override
+    public void update() {
+        printValue();
+    }
+
+    private void printValue() {
+        out.println(retrieveValue());
+    }
+
+    private String retrieveValue() {
+        return this.count.getCountValue().toString();
+    }
+
+    private class KeyReader implements Runnable {
+
+        @Override
+        public void run() {
+            try {
+                Reader entrada = new InputStreamReader(System.in);
+                while (!false) {
+                    char c = (char) entrada.read();
+                    if (c == 'r') {
+                        count.reset();
+                    } else if (c == '+') {
+                        count.increment();
+                    } else if (c == '-') {
+                        count.decrement();
+                    }
+                }
+            } catch (IOException ex) {
+
+            }
+        }
+    }
 }

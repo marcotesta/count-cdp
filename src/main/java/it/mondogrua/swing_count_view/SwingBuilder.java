@@ -1,9 +1,9 @@
 package it.mondogrua.swing_count_view;
 
 import static it.mondogrua.count.Count.DECREMENT_METHOD;
+import static it.mondogrua.count.Count.GET_VALUE_METHOD;
 import static it.mondogrua.count.Count.INCREMENT_METHOD;
 import static it.mondogrua.count.Count.RESET_METHOD;
-import static it.mondogrua.count.Count.GET_VALUE_METHOD;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -25,63 +25,64 @@ import javafx.scene.layout.StackPane;
 
 public class SwingBuilder implements Builder {
 
-	private JPanel panel;
-	private JavaUtilsCountObserverObservableAdapter count;
-	private Scene scene;
+    private JPanel panel;
+    private JavaUtilsCountObserverObservableAdapter count;
+    private Scene scene;
 
-	public SwingBuilder(JavaUtilsCountObserverObservableAdapter aCount) {
-		super();
-		this.count = aCount;
-	}
+    public SwingBuilder(JavaUtilsCountObserverObservableAdapter aCount) {
+        super();
+        this.count = aCount;
+    }
 
-	public void addPane() {
-		panel = new JPanel();
-    	panel.setLayout(new GridBagLayout());
-	}
-    
-	@Override
+    @Override
+    public void addPane() {
+        panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
+    }
+
+    @Override
     public void addDisplayBoxOn(int x, int y) {
         add(makeDisplayBoxOn(count, GET_VALUE_METHOD), x, y);
     }
 
-	@Override
-	public void addResetButtonOn(int x, int y) {
+    @Override
+    public void addResetButtonOn(int x, int y) {
         add(makeButtonOn(count, "Reset", RESET_METHOD), x, y);
     }
 
-	@Override
+    @Override
     public void addDecrementButtonOn(int x, int y) {
         add(makeButtonOn(count, "Decrement", DECREMENT_METHOD), x, y);
     }
 
-	@Override
+    @Override
     public void addIncrementButtonOn(int x, int y) {
         add(makeButtonOn(count, "Increment", INCREMENT_METHOD), x, y);
     }
-	
-	@Override
-	public void addScene(int x, int y) {
+
+    @Override
+    public void addScene(int x, int y) {
 
         final SwingNode swingNode = new SwingNode();
         swingNode.setContent(panel);
 
         StackPane pane = new StackPane();
         pane.getChildren().add(swingNode);
-		scene = new Scene(pane, x, y);
-	}
+        scene = new Scene(pane, x, y);
+    }
 
     @Override
-	public Scene getScene() {
-		return scene;
-	}
+    public Scene getScene() {
+        return scene;
+    }
 
     private JButton makeButtonOn(Object aModel, String label, String anAction) {
         JButton button = new JButton(label);
-        button.addActionListener(new ActionListener(){
+        button.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent event) {
-                new PluggableAdaptor(aModel, anAction, new Object[]{}).execute();
+                new PluggableAdaptor(aModel, anAction, new Object[] {}).execute();
             }
         });
 
@@ -99,8 +100,8 @@ public class SwingBuilder implements Builder {
         constraintFrame.gridy = y;
         return constraintFrame;
     }
-    
-	private void add(JComponent node, int x, int y) {
-		panel.add(node, makeConstraintFrame(x, y));
+
+    private void add(JComponent node, int x, int y) {
+        panel.add(node, makeConstraintFrame(x, y));
     }
 }

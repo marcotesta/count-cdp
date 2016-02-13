@@ -6,19 +6,19 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 
 public class AltDisplayBox extends Label {
-	
+
     private final ChangeListener<? super String> observer;
 
     public AltDisplayBox(PropertyCountObserverObservableAdapter observable) {
-    	observer = new ChangeListener<Object>() {
-    		@Override
-    		public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
-    			
-    			setText(newValue.toString());
-    		}
-    	};
+        observer = new ChangeListener<Object>() {
 
-    	observable.addObserver(observer);
-		setText(observable.getValueSafe());
+            @Override
+            public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+                setText(newValue.toString());
+            }
+        };
+
+        observable.addObserver(observer);
+        setText(observable.getValueSafe());
     }
 }
