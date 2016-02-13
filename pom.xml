@@ -11,9 +11,9 @@
   <url>http://maven.apache.org</url>
 
   <parent>
-     <groupId>it.mondogrua</groupId>
-     <artifactId>parent</artifactId>
-     <version>1.0.0</version>
+    <groupId>it.mondogrua</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.0</version>
   </parent>
 
   <properties>
@@ -27,5 +27,5 @@
     <plugins>
     </plugins>
   </build>
-  
+
 </project>
