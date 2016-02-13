@@ -18,10 +18,10 @@ import javafx.scene.layout.GridPane;
 public class JFXBuilder implements Builder {
 	
 	private GridPane pane;
-	private PropertyCountAdapter observable;
+	private PropertyCountObserverObservableAdapter observable;
 	private Scene scene;
 
-	public JFXBuilder(PropertyCountAdapter aObservable) {
+	public JFXBuilder(PropertyCountObserverObservableAdapter aObservable) {
 		this.observable = aObservable;
 	}
 
@@ -71,7 +71,7 @@ public class JFXBuilder implements Builder {
         return new Button(label, new PluggableAdaptor(aModel , anAction, new Object[]{}));
     }
 
-    protected Label makeDisplayBoxOn(PropertyCountAdapter observable) {
+    protected Label makeDisplayBoxOn(PropertyCountObserverObservableAdapter observable) {
         return new JFXDisplayBox(observable);
     }
 

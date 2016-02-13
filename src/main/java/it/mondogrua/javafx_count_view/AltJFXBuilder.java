@@ -5,12 +5,12 @@ import javafx.scene.control.Label;
 
 public class AltJFXBuilder extends JFXBuilder {
 
-    public AltJFXBuilder(PropertyCountAdapter aObservable) {
+    public AltJFXBuilder(PropertyCountObserverObservableAdapter aObservable) {
 		super(aObservable);
 	}
 
 	@Override
-    protected Label makeDisplayBoxOn(PropertyCountAdapter observable) {
+    protected Label makeDisplayBoxOn(PropertyCountObserverObservableAdapter observable) {
         return new AltDisplayBox(observable);
     }
 }

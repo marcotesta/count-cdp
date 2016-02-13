@@ -8,12 +8,12 @@ import java.io.Reader;
 import it.mondogrua.count.Count;
 import it.mondogrua.count.CountObserver;
 
-public class PrintStreamObserver implements CountObserver {
+public class ConsoleCountView implements CountObserver {
 	private Count count;
 	private PrintStream out;
 	private Thread keyReader;
 
-	public PrintStreamObserver(PrintStream out) {
+	public ConsoleCountView(PrintStream out) {
 		this.out = out;
 		this.keyReader = new Thread(new KeyReader());
 		this.keyReader.start();

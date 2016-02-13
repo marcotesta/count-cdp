@@ -6,11 +6,11 @@ import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 
-public class PropertyCountAdapter extends SimpleStringProperty implements CountObserver, Count {
+public class PropertyCountObserverObservableAdapter extends SimpleStringProperty implements CountObserver, Count {
 
 	private Count count;
 
-	public PropertyCountAdapter() {
+	public PropertyCountObserverObservableAdapter() {
 		super();
         set("");
 	}

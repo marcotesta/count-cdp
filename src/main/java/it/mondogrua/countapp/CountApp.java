@@ -1,12 +1,12 @@
 package it.mondogrua.countapp;
 
-import it.mondogrua.console.PrintStreamObserver;
+import it.mondogrua.console.ConsoleCountView;
 import it.mondogrua.count.DateCount;
 import it.mondogrua.count.ObservableCount;
 import it.mondogrua.javafx_count_view.AltJFXBuilder;
 import it.mondogrua.javafx_count_view.JFXBuilder;
-import it.mondogrua.javafx_count_view.PropertyCountAdapter;
-import it.mondogrua.swing_count_view.ObservableCountAdapter;
+import it.mondogrua.javafx_count_view.PropertyCountObserverObservableAdapter;
+import it.mondogrua.swing_count_view.JavaUtilsCountObserverObservableAdapter;
 import it.mondogrua.swing_count_view.SwingBuilder;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -22,13 +22,13 @@ public class CountApp extends Application {
 	private void configureCountApp(Stage primaryStage) {
 		ObservableCount count = new ObservableCount(new DateCount());
         
-        ObservableCountAdapter observableCountAdapter = new ObservableCountAdapter();
+        JavaUtilsCountObserverObservableAdapter observableCountAdapter = new JavaUtilsCountObserverObservableAdapter();
 		count.addCountObserver(observableCountAdapter);
 		
-        PropertyCountAdapter propertyCountAdapter = new PropertyCountAdapter();
+        PropertyCountObserverObservableAdapter propertyCountAdapter = new PropertyCountObserverObservableAdapter();
 		count.addCountObserver(propertyCountAdapter);
 		
-        PrintStreamObserver printStreamObserver = new PrintStreamObserver(System.out );
+        ConsoleCountView printStreamObserver = new ConsoleCountView(System.out );
 		count.addCountObserver(printStreamObserver);
 
         setupStage(primaryStage, "JavaFX DateCount Example", 
