@@ -16,14 +16,14 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import it.mondogrua.countapp.Builder;
+import it.mondogrua.countapp.SceneBuilder;
 import it.mondogrua.swing.DisplayBox;
 import it.mondogrua.utils.PluggableAdaptor;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
-public class SwingBuilder implements Builder {
+public class SwingBuilder implements SceneBuilder {
 
     private JPanel panel;
     private Observable count;

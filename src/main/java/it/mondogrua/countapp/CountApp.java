@@ -44,7 +44,7 @@ public class CountApp extends Application {
                 observableCountAdapter), 900, 500);
     }
 
-    private void setupStage(Stage stage, String lable, Builder builder,
+    private void setupStage(Stage stage, String lable, SceneBuilder builder,
             double x, double y) {
         stage.setScene(createScene(builder));
         stage.setX(x);
@@ -53,7 +53,7 @@ public class CountApp extends Application {
         stage.show();
     }
 
-    private Scene createScene(Builder builder) {
+    private Scene createScene(SceneBuilder builder) {
         new CountViewContainerDirector(builder).constructCountViewContainer();
         return builder.getScene();
     }

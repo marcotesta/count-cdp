@@ -4,7 +4,7 @@ import static it.mondogrua.count.Count.DECREMENT_METHOD;
 import static it.mondogrua.count.Count.INCREMENT_METHOD;
 import static it.mondogrua.count.Count.RESET_METHOD;
 
-import it.mondogrua.countapp.Builder;
+import it.mondogrua.countapp.SceneBuilder;
 import it.mondogrua.javafx.JFXDisplayBox;
 import it.mondogrua.utils.PluggableAdaptor;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,7 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
-public class JFXBuilder implements Builder {
+public class JFXBuilder implements SceneBuilder {
 
     private GridPane pane;
     private SimpleStringProperty observable;

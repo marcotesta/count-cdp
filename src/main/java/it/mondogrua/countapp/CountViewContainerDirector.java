@@ -2,9 +2,9 @@ package it.mondogrua.countapp;
 
 public class CountViewContainerDirector {
 
-    private Builder builder;
+    private SceneBuilder builder;
 
-    public CountViewContainerDirector(Builder builder) {
+    public CountViewContainerDirector(SceneBuilder builder) {
         this.builder = builder;
     }
 

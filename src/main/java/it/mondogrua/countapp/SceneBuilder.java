@@ -2,7 +2,7 @@ package it.mondogrua.countapp;
 
 import javafx.scene.Scene;
 
-public interface Builder {
+public interface SceneBuilder {
 
     public void addPane();
 
