@@ -5,8 +5,8 @@ import java.util.Observable;
 import it.mondogrua.count.Count;
 import it.mondogrua.count.CountObserver;
 
-public class JavaUtilsCountObserverObservableAdapter extends Observable implements CountObserver,
-        Count {
+public class JavaUtilsCountObserverObservableAdapter extends Observable
+        implements CountObserver, Count {
 
     private Count count;
 

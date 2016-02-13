@@ -68,11 +68,14 @@ public class JFXBuilder implements Builder {
         pane.setPadding(new Insets(25, 25, 25, 25));
     }
 
-    protected Button makeButtonOn(Object aModel, String label, String anAction) {
-        return new Button(label, new PluggableAdaptor(aModel, anAction, new Object[] {}));
+    protected Button makeButtonOn(Object aModel, String label,
+            String anAction) {
+        return new Button(label, new PluggableAdaptor(aModel, anAction,
+                new Object[] {}));
     }
 
-    protected Label makeDisplayBoxOn(PropertyCountObserverObservableAdapter observable) {
+    protected Label makeDisplayBoxOn(
+            PropertyCountObserverObservableAdapter observable) {
         return new JFXDisplayBox(observable);
     }
 

@@ -33,15 +33,16 @@ public class CountApp extends Application {
         ConsoleCountView printStreamObserver = new ConsoleCountView(System.out);
         count.addCountObserver(printStreamObserver);
 
-        setupStage(primaryStage, "JavaFX DateCount Example", new JFXBuilder(propertyCountAdapter),
-                100, 500);
-        setupStage(new Stage(), "Alternative JavaFX DateCount Example", new AltJFXBuilder(
-                propertyCountAdapter), 500, 500);
-        setupStage(new Stage(), "SWING DateCount Example", new SwingBuilder(observableCountAdapter),
-                900, 500);
+        setupStage(primaryStage, "JavaFX DateCount Example", new JFXBuilder(
+                propertyCountAdapter), 100, 500);
+        setupStage(new Stage(), "Alternative JavaFX DateCount Example",
+                new AltJFXBuilder(propertyCountAdapter), 500, 500);
+        setupStage(new Stage(), "SWING DateCount Example", new SwingBuilder(
+                observableCountAdapter), 900, 500);
     }
 
-    private void setupStage(Stage stage, String lable, Builder builder, double x, double y) {
+    private void setupStage(Stage stage, String lable, Builder builder,
+            double x, double y) {
         stage.setScene(createScene(builder));
         stage.setX(x);
         stage.setY(y);

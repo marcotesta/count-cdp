@@ -13,7 +13,8 @@ public class AltDisplayBox extends Label {
         observer = new ChangeListener<Object>() {
 
             @Override
-            public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+            public void changed(ObservableValue<?> observable, Object oldValue,
+                    Object newValue) {
                 setText(newValue.toString());
             }
         };

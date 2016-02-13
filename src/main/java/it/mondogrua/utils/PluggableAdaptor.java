@@ -9,7 +9,8 @@ public class PluggableAdaptor {
     private final String action;
     private final Object[] parameters;
 
-    public PluggableAdaptor(Object aModel, String anAction, Object[] someParameters) {
+    public PluggableAdaptor(Object aModel, String anAction,
+            Object[] someParameters) {
         this.model = aModel;
         this.action = anAction;
         this.parameters = someParameters;

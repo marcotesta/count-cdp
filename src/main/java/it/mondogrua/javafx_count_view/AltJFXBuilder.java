@@ -10,7 +10,8 @@ public class AltJFXBuilder extends JFXBuilder {
     }
 
     @Override
-    protected Label makeDisplayBoxOn(PropertyCountObserverObservableAdapter observable) {
+    protected Label makeDisplayBoxOn(
+            PropertyCountObserverObservableAdapter observable) {
         return new AltDisplayBox(observable);
     }
 }

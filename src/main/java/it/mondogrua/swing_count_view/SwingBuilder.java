@@ -82,7 +82,8 @@ public class SwingBuilder implements Builder {
 
             @Override
             public void actionPerformed(ActionEvent event) {
-                new PluggableAdaptor(aModel, anAction, new Object[] {}).execute();
+                new PluggableAdaptor(aModel, anAction, new Object[] {})
+                        .execute();
             }
         });
 
