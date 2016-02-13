@@ -5,14 +5,16 @@ import static it.mondogrua.count.Count.INCREMENT_METHOD;
 import static it.mondogrua.count.Count.RESET_METHOD;
 
 import it.mondogrua.countapp.Builder;
-import it.mondogrua.javafx.Button;
 import it.mondogrua.javafx.JFXDisplayBox;
 import it.mondogrua.utils.PluggableAdaptor;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
@@ -71,8 +73,19 @@ public class JFXBuilder implements Builder {
 
     protected Button makeButtonOn(Object aModel, String label,
             String anAction) {
-        return new Button(label, new PluggableAdaptor(aModel, anAction,
-                new Object[] {}));
+
+        PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction,
+                new Object[] {});
+        Button button = new Button(label);
+        button.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent e) {
+                aCommand.execute();
+            }
+        });
+
+        return button;
     }
 
     protected Label makeDisplayBoxOn(SimpleStringProperty observable) {
