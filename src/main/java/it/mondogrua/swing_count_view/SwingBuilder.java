@@ -26,10 +26,10 @@ import javafx.scene.layout.StackPane;
 public class SwingBuilder implements Builder {
 
     private JPanel panel;
-    private JavaUtilsCountObserverObservableAdapter count;
+    private Observable count;
     private Scene scene;
 
-    public SwingBuilder(JavaUtilsCountObserverObservableAdapter aCount) {
+    public SwingBuilder(Observable aCount) {
         super();
         this.count = aCount;
     }

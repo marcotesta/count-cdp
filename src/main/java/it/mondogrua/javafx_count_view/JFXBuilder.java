@@ -8,6 +8,7 @@ import it.mondogrua.countapp.Builder;
 import it.mondogrua.javafx.Button;
 import it.mondogrua.javafx.JFXDisplayBox;
 import it.mondogrua.utils.PluggableAdaptor;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -18,10 +19,10 @@ import javafx.scene.layout.GridPane;
 public class JFXBuilder implements Builder {
 
     private GridPane pane;
-    private PropertyCountObserverObservableAdapter observable;
+    private SimpleStringProperty observable;
     private Scene scene;
 
-    public JFXBuilder(PropertyCountObserverObservableAdapter aObservable) {
+    public JFXBuilder(SimpleStringProperty aObservable) {
         this.observable = aObservable;
     }
 
@@ -74,8 +75,7 @@ public class JFXBuilder implements Builder {
                 new Object[] {}));
     }
 
-    protected Label makeDisplayBoxOn(
-            PropertyCountObserverObservableAdapter observable) {
+    protected Label makeDisplayBoxOn(SimpleStringProperty observable) {
         return new JFXDisplayBox(observable);
     }
 

@@ -4,7 +4,6 @@ import it.mondogrua.count.Count;
 import it.mondogrua.count.CountObserver;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
 
 public class PropertyCountObserverObservableAdapter extends SimpleStringProperty
         implements CountObserver, Count {
@@ -31,14 +30,6 @@ public class PropertyCountObserverObservableAdapter extends SimpleStringProperty
                 setValue(retrieveValue());
             }
         });
-    }
-
-    public void addObserver(ChangeListener<? super String> changeListener) {
-        addListener(changeListener);
-    }
-
-    public void addObserver(SimpleStringProperty propertyObserver) {
-        propertyObserver.bind(this);
     }
 
     @Override
