@@ -5,14 +5,20 @@ import java.util.Scanner;
 
 import it.mondogrua.utils.PluggableAdaptor;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class StreamListener {
 
-    private Thread keyReader;
+    private Executor executor;
 
     public StreamListener(PluggableAdaptor aCommand, InputStream in,
             String regex) {
-        this.keyReader = new Thread(new KeyReader(aCommand, in, regex));
-        this.keyReader.start();
+        KeyReader reader = new KeyReader(aCommand, in, regex);
+
+        executor = Executors.newSingleThreadExecutor();
+        executor.execute(reader);
     }
 
     private class KeyReader implements Runnable {

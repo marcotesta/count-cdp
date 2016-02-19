@@ -1,6 +1,8 @@
 package it.mondogrua.countapp;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintStream;
 
 import it.mondogrua.console.ConsoleBuilder;
 import it.mondogrua.count.DateCount;
@@ -10,6 +12,7 @@ import it.mondogrua.javafx_count_view.JFXBuilder;
 import it.mondogrua.javafx_count_view.PropertyCountObserverObservableAdapter;
 import it.mondogrua.swing_count_view.JavaUtilsCountObserverObservableAdapter;
 import it.mondogrua.swing_count_view.SwingBuilder;
+import it.mondogrua.utils.InputStreamSplitter;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -21,7 +24,7 @@ public class CountApp extends Application {
         configureCountApp(primaryStage);
     }
 
-    private void configureCountApp(Stage primaryStage) {
+    private void configureCountApp(Stage primaryStage) throws IOException {
         ObservableCount count = new ObservableCount(new DateCount());
 
         JavaUtilsCountObserverObservableAdapter observableCountAdapter =
@@ -32,14 +35,17 @@ public class CountApp extends Application {
                 new PropertyCountObserverObservableAdapter();
         count.addCountObserver(propertyCountAdapter);
 
-        ConsoleBuilder consoleBuilder = new ConsoleBuilder(count);
-        InputStream[] firstPair = consoleBuilder.split(System.in);
-        InputStream[] secondPair = consoleBuilder.split(firstPair[0]);
+        InputStreamSplitter streamSplitter = new InputStreamSplitter(System.in);
+        InputStream incrementIn = streamSplitter.split();
+        InputStream decrementIn = streamSplitter.split();
+        InputStream resetIn = streamSplitter.split();
+        PrintStream out = System.out;
 
-        consoleBuilder.addIncrementStreamListener("+", firstPair[1]);
-        consoleBuilder.addDecrementStreamListener("-", secondPair[0]);
-        consoleBuilder.addResetStreamListener("r", secondPair[1]);
-        consoleBuilder.addDisplayStream(System.out);
+        ConsoleBuilder consoleBuilder = new ConsoleBuilder(count);
+        consoleBuilder.addIncrementStreamListener("+", incrementIn);
+        consoleBuilder.addDecrementStreamListener("-", decrementIn);
+        consoleBuilder.addResetStreamListener("r", resetIn);
+        consoleBuilder.addDisplayStream(out);
 
         setupStage(primaryStage, "JavaFX DateCount Example", new JFXBuilder(
                 propertyCountAdapter), 100, 500);
