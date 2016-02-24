@@ -88,7 +88,9 @@ public class JFXBuilder implements SceneBuilder {
     }
 
     protected Label makeDisplayBoxOn(SimpleStringProperty observable) {
-        return new JFXDisplayBox(observable);
+        JFXDisplayBox displayBox = new JFXDisplayBox();
+        displayBox.bind(observable);
+        return displayBox;
     }
 
     private void add(Node node, int x, int y) {

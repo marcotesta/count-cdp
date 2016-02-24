@@ -6,7 +6,10 @@ import javafx.scene.control.Label;
 
 public class JFXDisplayBox extends Label {
 
-    public JFXDisplayBox(SimpleStringProperty property) {
+    public JFXDisplayBox() {
+    }
+
+    public void bind(SimpleStringProperty property) {
         textProperty().bind(Bindings.convert(property));
     }
 }
