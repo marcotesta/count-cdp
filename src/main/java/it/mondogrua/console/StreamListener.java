@@ -2,12 +2,10 @@ package it.mondogrua.console;
 
 import java.io.InputStream;
 import java.util.Scanner;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import it.mondogrua.utils.PluggableAdaptor;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class StreamListener {
 
@@ -39,7 +37,7 @@ public class StreamListener {
         public void run() {
             Scanner reader = new Scanner(in);
             try {
-                while (!false) {
+                while (reader.hasNextLine()) {
                     String c = reader.nextLine();
                     if (c.equals(regex)) {
                         command.execute();
