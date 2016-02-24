@@ -15,19 +15,26 @@ public class InputStreamSplitter {
 
     private Executor executor;
 
-    private List<OutputStream> outputs = Collections.synchronizedList(new ArrayList<OutputStream>());
+    private List<OutputStream> outputs = Collections.synchronizedList(
+            new ArrayList<OutputStream>());
 
-    public InputStreamSplitter(InputStream in) {
-        KeyReader reader = new KeyReader(in);
+    private InputStream input;
+
+    public InputStreamSplitter(InputStream input) {
+        this.input = input;
+    }
+
+    public void start() {
+        KeyReader reader = new KeyReader(input);
         executor = Executors.newSingleThreadExecutor();
         executor.execute(reader);
     }
 
     public InputStream split() throws IOException {
         PipedOutputStream output = new PipedOutputStream();
-        PipedInputStream pins = new PipedInputStream(output);
+        PipedInputStream input = new PipedInputStream(output);
         outputs.add(output);
-        return pins;
+        return input;
     }
 
     private class KeyReader implements Runnable {
@@ -44,7 +51,7 @@ public class InputStreamSplitter {
             while (!false) {
                 try {
                     int data = in.read();
-                    while(data != -1){
+                    while (data != -1) {
                         writeToOutputStreams(data);
                         data = in.read();
                     }

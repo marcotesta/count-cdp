@@ -1,5 +1,6 @@
 package it.mondogrua.countapp;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -35,13 +36,19 @@ public class CountApp extends Application {
                 new PropertyCountObserverObservableAdapter();
         count.addCountObserver(propertyCountAdapter);
 
-        InputStreamSplitter streamSplitter = new InputStreamSplitter(System.in);
+        InputStream fileInputStream = new FileInputStream("count-input.txt");
+        InputStream systemInputStream = System.in;
+        InputStreamSplitter streamSplitter = new InputStreamSplitter(
+                systemInputStream);
         InputStream incrementIn = streamSplitter.split();
         InputStream decrementIn = streamSplitter.split();
         InputStream resetIn = streamSplitter.split();
+        streamSplitter.start();
+
         PrintStream out = System.out;
 
         ConsoleBuilder consoleBuilder = new ConsoleBuilder(count);
+        consoleBuilder.addIncrementStreamListener("+", fileInputStream);
         consoleBuilder.addIncrementStreamListener("+", incrementIn);
         consoleBuilder.addDecrementStreamListener("-", decrementIn);
         consoleBuilder.addResetStreamListener("r", resetIn);
