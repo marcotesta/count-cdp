@@ -77,21 +77,27 @@ public class SwingBuilder implements SceneBuilder {
     }
 
     private JButton makeButtonOn(Object aModel, String label, String anAction) {
+        PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction,
+                new Object[] {});
         JButton button = new JButton(label);
         button.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent event) {
-                new PluggableAdaptor(aModel, anAction, new Object[] {})
-                        .execute();
+                aCommand.execute();
             }
         });
 
         return button;
     }
 
-    private DisplayBox makeDisplayBoxOn(Observable observable, String action) {
-        return new DisplayBox(observable, action);
+    private DisplayBox makeDisplayBoxOn(Observable aObservable, String action) {
+        PluggableAdaptor adaptor = new PluggableAdaptor(aObservable, action,
+                new Object[] {});
+        DisplayBox displayBox = new DisplayBox(adaptor);
+        aObservable.addObserver(displayBox);
+        return displayBox;
+
     }
 
     private GridBagConstraints makeConstraintFrame(int x, int y) {

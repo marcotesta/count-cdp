@@ -11,14 +11,16 @@ import it.mondogrua.utils.PluggableAdaptor;
 @SuppressWarnings("serial")
 public class DisplayBox extends JLabel implements Observer {
 
-    public DisplayBox(Observable aObservable, String action) {
-        aObservable.addObserver(this);
-        update(aObservable, action);
+    private PluggableAdaptor adaptor;
+
+    public DisplayBox(PluggableAdaptor adaptor) {
+        this.adaptor = adaptor;
+        setContent(getContentFrom());
     }
 
     @Override
     public void update(Observable observable, Object action) {
-        setContent(getContentFrom(observable, (String) action));
+        setContent(getContentFrom());
     }
 
     // Private Methods --------------------------------------------------------
@@ -33,8 +35,7 @@ public class DisplayBox extends JLabel implements Observer {
         });
     }
 
-    private String getContentFrom(Object model, String action) {
-        return new PluggableAdaptor(model, action, new Object[] {}).execute()
-                .toString();
+    private String getContentFrom() {
+        return adaptor.execute().toString();
     }
 }

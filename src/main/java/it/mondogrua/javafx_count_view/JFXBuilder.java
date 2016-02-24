@@ -71,8 +71,7 @@ public class JFXBuilder implements SceneBuilder {
         pane.setPadding(new Insets(25, 25, 25, 25));
     }
 
-    protected Button makeButtonOn(Object aModel, String label,
-            String anAction) {
+    private Button makeButtonOn(Object aModel, String label, String anAction) {
 
         PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction,
                 new Object[] {});
