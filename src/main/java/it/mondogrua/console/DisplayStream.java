@@ -16,19 +16,19 @@ public class DisplayStream implements CountObserver {
     }
 
     @Override
+    public void setSubject(ObservableCount aCount) {
+        this.count = aCount;
+        printValue();
+        aCount.addCountObserver(this);
+    }
+
+    @Override
     public void update() {
         printValue();
     }
 
     private void printValue() {
         out.println(retrieveValue());
-    }
-
-    @Override
-    public void setSubject(ObservableCount aCount) {
-        this.count = aCount;
-        printValue();
-        aCount.addCountObserver(this);
     }
 
     private String retrieveValue() {
