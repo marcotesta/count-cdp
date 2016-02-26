@@ -4,6 +4,7 @@ import java.util.Observable;
 
 import it.mondogrua.count.Count;
 import it.mondogrua.count.CountObserver;
+import it.mondogrua.count.ObservableCount;
 
 public class JavaUtilsCountObserverObservableAdapter extends Observable
         implements CountObserver, Count {
@@ -11,8 +12,9 @@ public class JavaUtilsCountObserverObservableAdapter extends Observable
     private Count count;
 
     @Override
-    public void setSubject(Count aCount) {
+    public void setSubject(ObservableCount aCount) {
         this.count = aCount;
+        aCount.addCountObserver(this);
     }
 
     @Override

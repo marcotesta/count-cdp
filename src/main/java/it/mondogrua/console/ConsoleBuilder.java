@@ -41,7 +41,7 @@ public class ConsoleBuilder {
     private DisplayStream makeDisplayStream(ObservableCount count,
             PrintStream out) {
         DisplayStream displayStream = new DisplayStream(out);
-        count.addCountObserver(displayStream);
+        displayStream.setSubject(count);
         return displayStream;
     }
 

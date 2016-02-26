@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 import it.mondogrua.count.Count;
 import it.mondogrua.count.CountObserver;
+import it.mondogrua.count.ObservableCount;
 
 public class DisplayStream implements CountObserver {
 
@@ -24,9 +25,10 @@ public class DisplayStream implements CountObserver {
     }
 
     @Override
-    public void setSubject(Count aCount) {
+    public void setSubject(ObservableCount aCount) {
         this.count = aCount;
         printValue();
+        aCount.addCountObserver(this);
     }
 
     private String retrieveValue() {

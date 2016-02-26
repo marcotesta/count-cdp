@@ -14,7 +14,6 @@ public class ObservableCount implements Count {
     }
 
     public boolean addCountObserver(CountObserver observer) {
-        observer.setSubject(this);
         return observers.add(observer);
     }
 

@@ -4,5 +4,5 @@ public interface CountObserver {
 
     public void update();
 
-    public void setSubject(Count aCount);
+    public void setSubject(ObservableCount aCount);
 }

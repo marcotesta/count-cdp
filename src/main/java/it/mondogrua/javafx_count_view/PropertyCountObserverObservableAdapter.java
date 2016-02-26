@@ -2,6 +2,7 @@ package it.mondogrua.javafx_count_view;
 
 import it.mondogrua.count.Count;
 import it.mondogrua.count.CountObserver;
+import it.mondogrua.count.ObservableCount;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -16,9 +17,10 @@ public class PropertyCountObserverObservableAdapter extends SimpleStringProperty
     }
 
     @Override
-    public void setSubject(Count aCount) {
+    public void setSubject(ObservableCount aCount) {
         this.count = aCount;
         setValue(retrieveValue());
+        aCount.addCountObserver(this);
     }
 
     @Override
