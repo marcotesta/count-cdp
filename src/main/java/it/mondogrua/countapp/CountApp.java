@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 import it.mondogrua.console.ConsoleBuilder;
+import it.mondogrua.count.Count;
 import it.mondogrua.count.DateCount;
 import it.mondogrua.count.ObservableCount;
 import it.mondogrua.javafx_count_view.AltJFXBuilder;
@@ -14,6 +15,8 @@ import it.mondogrua.javafx_count_view.PropertyCountObserverObservableAdapter;
 import it.mondogrua.swing_count_view.JavaUtilsCountObserverObservableAdapter;
 import it.mondogrua.swing_count_view.SwingBuilder;
 import it.mondogrua.utils.InputStreamSplitter;
+import it.mondogrua.utils.ValueModel;
+import it.mondogrua.utils.ValueModelAdaptor;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -32,8 +35,10 @@ public class CountApp extends Application {
                 new JavaUtilsCountObserverObservableAdapter();
         observableCountAdapter.setSubject(count);
 
+        ValueModel valueModel = new ValueModelAdaptor(count,
+                Count.GET_VALUE_METHOD, new Object[] {});
         PropertyCountObserverObservableAdapter propertyCountAdapter =
-                new PropertyCountObserverObservableAdapter();
+                new PropertyCountObserverObservableAdapter(valueModel);
         propertyCountAdapter.setSubject(count);
 
         InputStream fileInputStream = new FileInputStream("count-input.txt");
