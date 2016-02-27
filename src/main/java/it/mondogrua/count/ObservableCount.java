@@ -3,17 +3,21 @@ package it.mondogrua.count;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObservableCount implements Count {
+import it.mondogrua.utils.Observable;
+import it.mondogrua.utils.Observer;
+
+public class ObservableCount implements Observable, Count {
 
     private Count count;
-    private final List<CountObserver> observers = new ArrayList<>();
+    private final List<Observer> observers = new ArrayList<>();
 
     public ObservableCount(Count count) {
         super();
         this.count = count;
     }
 
-    public boolean addCountObserver(CountObserver observer) {
+    @Override
+    public boolean addObserver(Observer observer) {
         return observers.add(observer);
     }
 
@@ -41,7 +45,7 @@ public class ObservableCount implements Count {
     }
 
     private void notifyObservers() {
-        for (CountObserver observer : observers) {
+        for (Observer observer : observers) {
             observer.update();
         }
     }

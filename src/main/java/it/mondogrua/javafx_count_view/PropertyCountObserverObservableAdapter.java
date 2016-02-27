@@ -1,12 +1,12 @@
 package it.mondogrua.javafx_count_view;
 
-import it.mondogrua.count.CountObserver;
+import it.mondogrua.utils.Observer;
 import it.mondogrua.utils.ValueModel;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 
 public class PropertyCountObserverObservableAdapter extends SimpleStringProperty
-        implements CountObserver {
+        implements Observer {
 
     private ValueModel valueModel;
 

@@ -2,10 +2,10 @@ package it.mondogrua.console;
 
 import java.io.PrintStream;
 
-import it.mondogrua.count.CountObserver;
+import it.mondogrua.utils.Observer;
 import it.mondogrua.utils.ValueModel;
 
-public class DisplayStream implements CountObserver {
+public class DisplayStream implements Observer {
 
     private PrintStream out;
     private ValueModel valueModel;

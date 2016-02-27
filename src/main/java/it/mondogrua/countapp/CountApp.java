@@ -33,13 +33,13 @@ public class CountApp extends Application {
 
         JavaUtilsCountObserverObservableAdapter observableCountAdapter =
                 new JavaUtilsCountObserverObservableAdapter();
-        count.addCountObserver(observableCountAdapter);
+        count.addObserver(observableCountAdapter);
 
         ValueModel valueModel = new ValueModelAdaptor(count,
                 Count.GET_VALUE_METHOD, new Object[] {});
         PropertyCountObserverObservableAdapter propertyCountAdapter =
                 new PropertyCountObserverObservableAdapter(valueModel);
-        count.addCountObserver(propertyCountAdapter);
+        count.addObserver(propertyCountAdapter);
 
         InputStream fileInputStream = new FileInputStream("count-input.txt");
         InputStream systemInputStream = System.in;

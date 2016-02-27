@@ -2,10 +2,10 @@ package it.mondogrua.swing_count_view;
 
 import java.util.Observable;
 
-import it.mondogrua.count.CountObserver;
+import it.mondogrua.utils.Observer;
 
 public class JavaUtilsCountObserverObservableAdapter extends Observable
-        implements CountObserver {
+        implements Observer {
 
     @Override
     public void update() {

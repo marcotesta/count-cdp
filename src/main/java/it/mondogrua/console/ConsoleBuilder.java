@@ -49,7 +49,7 @@ public class ConsoleBuilder {
                 new Object[] {});
 
         DisplayStream displayStream = new DisplayStream(out, adaptor);
-        observable.addCountObserver(displayStream);
+        observable.addObserver(displayStream);
         return displayStream;
     }
 
