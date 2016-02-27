@@ -1,10 +1,8 @@
-package it.mondogrua.swing_count_view;
+package it.mondogrua.utils;
 
 import java.util.Observable;
 
-import it.mondogrua.utils.Observer;
-
-public class JavaUtilsCountObserverObservableAdapter extends Observable
+public class JavaUtilsToMgObserverObservableAdapter extends Observable
         implements Observer {
 
     @Override

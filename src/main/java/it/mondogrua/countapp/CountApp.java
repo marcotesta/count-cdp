@@ -11,10 +11,10 @@ import it.mondogrua.count.DateCount;
 import it.mondogrua.count.ObservableCount;
 import it.mondogrua.javafx_count_view.AltJFXBuilder;
 import it.mondogrua.javafx_count_view.JFXBuilder;
-import it.mondogrua.javafx_count_view.PropertyCountObserverObservableAdapter;
-import it.mondogrua.swing_count_view.JavaUtilsCountObserverObservableAdapter;
 import it.mondogrua.swing_count_view.SwingBuilder;
 import it.mondogrua.utils.InputStreamSplitter;
+import it.mondogrua.utils.JavaUtilsToMgObserverObservableAdapter;
+import it.mondogrua.utils.SimpleStringPropertyToMgObserverObservableAdapter;
 import it.mondogrua.utils.ValueModel;
 import it.mondogrua.utils.ValueModelAdaptor;
 import javafx.application.Application;
@@ -31,15 +31,15 @@ public class CountApp extends Application {
     private void configureCountApp(Stage primaryStage) throws IOException {
         ObservableCount count = new ObservableCount(new DateCount());
 
-        JavaUtilsCountObserverObservableAdapter observableCountAdapter =
-                new JavaUtilsCountObserverObservableAdapter();
-        count.addObserver(observableCountAdapter);
+        JavaUtilsToMgObserverObservableAdapter javaUtilsObsObsAdapter =
+                new JavaUtilsToMgObserverObservableAdapter();
+        count.addObserver(javaUtilsObsObsAdapter);
 
         ValueModel valueModel = new ValueModelAdaptor(count,
                 Count.GET_VALUE_METHOD, new Object[] {});
-        PropertyCountObserverObservableAdapter propertyCountAdapter =
-                new PropertyCountObserverObservableAdapter(valueModel);
-        count.addObserver(propertyCountAdapter);
+        SimpleStringPropertyToMgObserverObservableAdapter propertyObsObsAdapter =
+                new SimpleStringPropertyToMgObserverObservableAdapter(valueModel);
+        count.addObserver(propertyObsObsAdapter);
 
         InputStream fileInputStream = new FileInputStream("count-input.txt");
         InputStream systemInputStream = System.in;
@@ -60,11 +60,11 @@ public class CountApp extends Application {
         consoleBuilder.addDisplayStream(out);
 
         setupStage(primaryStage, "JavaFX DateCount Example", new JFXBuilder(
-                propertyCountAdapter, count), 100, 500);
+                propertyObsObsAdapter, count), 100, 500);
         setupStage(new Stage(), "Alternative JavaFX DateCount Example",
-                new AltJFXBuilder(propertyCountAdapter, count), 500, 500);
+                new AltJFXBuilder(propertyObsObsAdapter, count), 500, 500);
         setupStage(new Stage(), "SWING DateCount Example", new SwingBuilder(
-                observableCountAdapter, count), 900, 500);
+                javaUtilsObsObsAdapter, count), 900, 500);
     }
 
     private void setupStage(Stage stage, String lable, SceneBuilder builder,
