@@ -9,17 +9,21 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.mondogrua.count.Count;
 import it.mondogrua.count.ObservableCount;
 import it.mondogrua.utils.PluggableAdaptor;
 
 public class ConsoleBuilder {
 
     private List<Object> components = new ArrayList<Object>();
-    private ObservableCount count;
+    private ObservableCount observable;
 
-    public ConsoleBuilder(ObservableCount count) {
+    private Count count;
+
+    public ConsoleBuilder(ObservableCount observable, Count aCount) {
         super();
-        this.count = count;
+        this.observable = observable;
+        this.count = aCount;
     }
 
     public void addResetStreamListener(String regex, InputStream in) {
@@ -35,13 +39,13 @@ public class ConsoleBuilder {
     }
 
     public void addDisplayStream(PrintStream out) {
-        components.add(makeDisplayStream(count, out));
+        components.add(makeDisplayStream(observable, out));
     }
 
-    private DisplayStream makeDisplayStream(ObservableCount count,
+    private DisplayStream makeDisplayStream(ObservableCount observable,
             PrintStream out) {
         DisplayStream displayStream = new DisplayStream(out);
-        displayStream.setSubject(count);
+        displayStream.setSubject(observable);
         return displayStream;
     }
 

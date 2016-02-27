@@ -1,9 +1,6 @@
 package it.mondogrua.swing_count_view;
 
-import static it.mondogrua.count.Count.DECREMENT_METHOD;
 import static it.mondogrua.count.Count.GET_VALUE_METHOD;
-import static it.mondogrua.count.Count.INCREMENT_METHOD;
-import static it.mondogrua.count.Count.RESET_METHOD;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import it.mondogrua.count.Count;
 import it.mondogrua.countapp.SceneBuilder;
 import it.mondogrua.swing.DisplayBox;
 import it.mondogrua.utils.PluggableAdaptor;
@@ -27,11 +25,13 @@ public class SwingBuilder implements SceneBuilder {
 
     private JPanel panel;
     private Observable observable;
+    private Count count;
     private Scene scene;
 
-    public SwingBuilder(Observable aCount) {
+    public SwingBuilder(Observable anObservable, Count count) {
         super();
-        this.observable = aCount;
+        this.observable = anObservable;
+        this.count = count;
     }
 
     @Override
@@ -47,17 +47,17 @@ public class SwingBuilder implements SceneBuilder {
 
     @Override
     public void addResetButtonOn(int x, int y) {
-        add(makeButtonOn(observable, "Reset", RESET_METHOD), x, y);
+        add(makeButtonOn(count, "Reset", Count.RESET_METHOD), x, y);
     }
 
     @Override
     public void addDecrementButtonOn(int x, int y) {
-        add(makeButtonOn(observable, "Decrement", DECREMENT_METHOD), x, y);
+        add(makeButtonOn(count, "Decrement", Count.DECREMENT_METHOD), x, y);
     }
 
     @Override
     public void addIncrementButtonOn(int x, int y) {
-        add(makeButtonOn(observable, "Increment", INCREMENT_METHOD), x, y);
+        add(makeButtonOn(count, "Increment", Count.INCREMENT_METHOD), x, y);
     }
 
     @Override

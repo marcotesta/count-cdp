@@ -47,7 +47,7 @@ public class CountApp extends Application {
 
         PrintStream out = System.out;
 
-        ConsoleBuilder consoleBuilder = new ConsoleBuilder(count);
+        ConsoleBuilder consoleBuilder = new ConsoleBuilder(count, count);
         consoleBuilder.addIncrementStreamListener("+", fileInputStream);
         consoleBuilder.addIncrementStreamListener("+", incrementIn);
         consoleBuilder.addDecrementStreamListener("-", decrementIn);
@@ -55,11 +55,11 @@ public class CountApp extends Application {
         consoleBuilder.addDisplayStream(out);
 
         setupStage(primaryStage, "JavaFX DateCount Example", new JFXBuilder(
-                propertyCountAdapter), 100, 500);
+                propertyCountAdapter, count), 100, 500);
         setupStage(new Stage(), "Alternative JavaFX DateCount Example",
-                new AltJFXBuilder(propertyCountAdapter), 500, 500);
+                new AltJFXBuilder(propertyCountAdapter, count), 500, 500);
         setupStage(new Stage(), "SWING DateCount Example", new SwingBuilder(
-                observableCountAdapter), 900, 500);
+                observableCountAdapter, count), 900, 500);
     }
 
     private void setupStage(Stage stage, String lable, SceneBuilder builder,

@@ -1,9 +1,6 @@
 package it.mondogrua.javafx_count_view;
 
-import static it.mondogrua.count.Count.DECREMENT_METHOD;
-import static it.mondogrua.count.Count.INCREMENT_METHOD;
-import static it.mondogrua.count.Count.RESET_METHOD;
-
+import it.mondogrua.count.Count;
 import it.mondogrua.countapp.SceneBuilder;
 import it.mondogrua.javafx.JFXDisplayBox;
 import it.mondogrua.utils.PluggableAdaptor;
@@ -22,10 +19,12 @@ public class JFXBuilder implements SceneBuilder {
 
     private GridPane pane;
     private SimpleStringProperty observable;
+    private Count count;
     private Scene scene;
 
-    public JFXBuilder(SimpleStringProperty aObservable) {
+    public JFXBuilder(SimpleStringProperty aObservable, Count aCount) {
         this.observable = aObservable;
+        this.count = aCount;
     }
 
     @Override
@@ -40,17 +39,17 @@ public class JFXBuilder implements SceneBuilder {
 
     @Override
     public void addResetButtonOn(int x, int y) {
-        add(makeButtonOn(observable, "Reset", RESET_METHOD), x, y);
+        add(makeButtonOn(count, "Reset", Count.RESET_METHOD), x, y);
     }
 
     @Override
     public void addDecrementButtonOn(int x, int y) {
-        add(makeButtonOn(observable, "Decrement", DECREMENT_METHOD), x, y);
+        add(makeButtonOn(count, "Decrement", Count.DECREMENT_METHOD), x, y);
     }
 
     @Override
     public void addIncrementButtonOn(int x, int y) {
-        add(makeButtonOn(observable, "Increment", INCREMENT_METHOD), x, y);
+        add(makeButtonOn(count, "Increment", Count.INCREMENT_METHOD), x, y);
     }
 
     @Override
