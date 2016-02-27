@@ -3,7 +3,6 @@ package it.mondogrua.javafx_count_view;
 import it.mondogrua.count.Count;
 import it.mondogrua.javafx.AltDisplayBox;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.Label;
 
 public class AltJFXBuilder extends JFXBuilder {
 
@@ -12,7 +11,9 @@ public class AltJFXBuilder extends JFXBuilder {
     }
 
     @Override
-    protected Label makeDisplayBoxOn(SimpleStringProperty observable) {
-        return new AltDisplayBox(observable);
+    public void addDisplayBoxOn(int x, int y) {
+        AltDisplayBox displayBox = new AltDisplayBox();
+        displayBox.bind(observable);
+        add(displayBox, x, y);
     }
 }

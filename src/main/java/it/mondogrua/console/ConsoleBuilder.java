@@ -10,50 +10,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.mondogrua.count.Count;
-import it.mondogrua.count.ObservableCount;
+import it.mondogrua.utils.Observable;
 import it.mondogrua.utils.PluggableAdaptor;
 import it.mondogrua.utils.ValueModelAdaptor;
 
 public class ConsoleBuilder {
 
     private List<Object> components = new ArrayList<Object>();
-    private ObservableCount observable;
+    private Observable observable;
     private Count count;
 
-    public ConsoleBuilder(ObservableCount observable, Count aCount) {
+    public ConsoleBuilder(Observable observable, Count aCount) {
         super();
         this.observable = observable;
         this.count = aCount;
     }
 
     public void addResetStreamListener(String regex, InputStream in) {
-        add(makeStreamListener(count, RESET_METHOD, regex, in));
+        add(makeStreamListenerOn(count, RESET_METHOD, regex, in));
     }
 
     public void addIncrementStreamListener(String regex, InputStream in) {
-        add(makeStreamListener(count, INCREMENT_METHOD, regex, in));
+        add(makeStreamListenerOn(count, INCREMENT_METHOD, regex, in));
     }
 
     public void addDecrementStreamListener(String regex, InputStream in) {
-        add(makeStreamListener(count, DECREMENT_METHOD, regex, in));
+        add(makeStreamListenerOn(count, DECREMENT_METHOD, regex, in));
     }
 
     public void addDisplayStream(PrintStream out) {
-        components.add(makeDisplayStream(out, observable,
-                Count.GET_VALUE_METHOD));
+        DisplayStream displayStream = makeDisplayStream(out, count,
+                Count.GET_VALUE_METHOD);
+        observable.addObserver(displayStream);
+        components.add(displayStream);
+
     }
 
-    private DisplayStream makeDisplayStream(PrintStream out,
-            ObservableCount observable, String action) {
-        ValueModelAdaptor adaptor = new ValueModelAdaptor(observable, action,
+    private DisplayStream makeDisplayStream(PrintStream out, Object aModel,
+            String action) {
+        ValueModelAdaptor adaptor = new ValueModelAdaptor(aModel, action,
                 new Object[] {});
 
         DisplayStream displayStream = new DisplayStream(out, adaptor);
-        observable.addObserver(displayStream);
         return displayStream;
     }
 
-    private StreamListener makeStreamListener(Object aModel, String anAction,
+    private StreamListener makeStreamListenerOn(Object aModel, String anAction,
             String regex, InputStream in) {
         PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction,
                 new Object[] {});

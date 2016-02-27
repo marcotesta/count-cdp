@@ -41,7 +41,10 @@ public class SwingBuilder implements SceneBuilder {
 
     @Override
     public void addDisplayBoxOn(int x, int y) {
-        add(makeDisplayBoxOn(observable, count, Count.GET_VALUE_METHOD), x, y);
+        DisplayBox displayBox = makeDisplayBoxOn(count, Count.GET_VALUE_METHOD);
+        observable.addObserver(displayBox);
+        add(displayBox, x, y);
+
     }
 
     @Override
@@ -90,13 +93,10 @@ public class SwingBuilder implements SceneBuilder {
         return button;
     }
 
-    private DisplayBox makeDisplayBoxOn(Observable aObservable, Object aModel,
-            String action) {
+    private DisplayBox makeDisplayBoxOn(Object aModel, String action) {
         ValueModelAdaptor valueModel = new ValueModelAdaptor(aModel, action,
                 new Object[] {});
-        DisplayBox displayBox = new DisplayBox(valueModel);
-        aObservable.addObserver(displayBox);
-        return displayBox;
+        return new DisplayBox(valueModel);
 
     }
 

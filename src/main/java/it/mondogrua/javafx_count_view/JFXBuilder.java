@@ -12,13 +12,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class JFXBuilder implements SceneBuilder {
 
     private GridPane pane;
-    private SimpleStringProperty observable;
+    protected SimpleStringProperty observable;
     private Count count;
     private Scene scene;
 
@@ -34,7 +33,9 @@ public class JFXBuilder implements SceneBuilder {
 
     @Override
     public void addDisplayBoxOn(int x, int y) {
-        add(makeDisplayBoxOn(observable), x, y);
+        JFXDisplayBox displayBox = makeDisplayBoxOn();
+        displayBox.bind(observable);
+        add(displayBox, x, y);
     }
 
     @Override
@@ -62,7 +63,11 @@ public class JFXBuilder implements SceneBuilder {
         return scene;
     }
 
-    protected void makePane() {
+    protected void add(Node node, int x, int y) {
+        pane.add(node, x, y);
+    }
+
+    private void makePane() {
         pane = new GridPane();
         pane.setAlignment(Pos.CENTER);
         pane.setHgap(10);
@@ -86,13 +91,7 @@ public class JFXBuilder implements SceneBuilder {
         return button;
     }
 
-    protected Label makeDisplayBoxOn(SimpleStringProperty observable) {
-        JFXDisplayBox displayBox = new JFXDisplayBox();
-        displayBox.bind(observable);
-        return displayBox;
-    }
-
-    private void add(Node node, int x, int y) {
-        pane.add(node, x, y);
+    private JFXDisplayBox makeDisplayBoxOn() {
+        return new JFXDisplayBox();
     }
 }

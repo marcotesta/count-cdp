@@ -7,7 +7,8 @@ import javafx.scene.control.Label;
 
 public class AltDisplayBox extends Label {
 
-    public AltDisplayBox(SimpleStringProperty observable) {
+    public void bind(SimpleStringProperty observable) {
+        setText(observable.getValueSafe());
         observable.addListener(new ChangeListener<Object>() {
 
             @Override
@@ -16,7 +17,5 @@ public class AltDisplayBox extends Label {
                 setText(newValue.toString());
             }
         });
-
-        setText(observable.getValueSafe());
     }
 }
