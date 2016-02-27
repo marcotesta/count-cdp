@@ -17,6 +17,7 @@ import it.mondogrua.count.Count;
 import it.mondogrua.countapp.SceneBuilder;
 import it.mondogrua.swing.DisplayBox;
 import it.mondogrua.utils.PluggableAdaptor;
+import it.mondogrua.utils.ValueModelAdaptor;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
@@ -92,7 +93,7 @@ public class SwingBuilder implements SceneBuilder {
     }
 
     private DisplayBox makeDisplayBoxOn(Observable aObservable, String action) {
-        PluggableAdaptor adaptor = new PluggableAdaptor(aObservable, action,
+        ValueModelAdaptor adaptor = new ValueModelAdaptor(aObservable, action,
                 new Object[] {});
         DisplayBox displayBox = new DisplayBox(adaptor);
         aObservable.addObserver(displayBox);

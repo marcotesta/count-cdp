@@ -6,14 +6,14 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-import it.mondogrua.utils.PluggableAdaptor;
+import it.mondogrua.utils.ValueModelAdaptor;
 
 @SuppressWarnings("serial")
 public class DisplayBox extends JLabel implements Observer {
 
-    private PluggableAdaptor adaptor;
+    private ValueModelAdaptor adaptor;
 
-    public DisplayBox(PluggableAdaptor adaptor) {
+    public DisplayBox(ValueModelAdaptor adaptor) {
         this.adaptor = adaptor;
         setContent(getContentFrom());
     }
@@ -36,6 +36,6 @@ public class DisplayBox extends JLabel implements Observer {
     }
 
     private String getContentFrom() {
-        return adaptor.execute().toString();
+        return adaptor.getValue();
     }
 }
