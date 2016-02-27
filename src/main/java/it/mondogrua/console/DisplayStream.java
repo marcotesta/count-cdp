@@ -3,7 +3,6 @@ package it.mondogrua.console;
 import java.io.PrintStream;
 
 import it.mondogrua.count.CountObserver;
-import it.mondogrua.count.ObservableCount;
 import it.mondogrua.utils.ValueModel;
 
 public class DisplayStream implements CountObserver {
@@ -15,11 +14,6 @@ public class DisplayStream implements CountObserver {
         this.out = out;
         this.valueModel = aValueModel;
         printValue();
-    }
-
-    @Override
-    public void setSubject(ObservableCount aCount) {
-        aCount.addCountObserver(this);
     }
 
     @Override
