@@ -2,23 +2,23 @@ package it.mondogrua.console;
 
 import java.io.PrintStream;
 
-import it.mondogrua.count.Count;
 import it.mondogrua.count.CountObserver;
 import it.mondogrua.count.ObservableCount;
+import it.mondogrua.utils.ValueModel;
 
 public class DisplayStream implements CountObserver {
 
     private PrintStream out;
-    private Count count;
+    private ValueModel valueModel;
 
-    public DisplayStream(PrintStream out) {
+    public DisplayStream(PrintStream out, ValueModel aValueModel) {
         this.out = out;
+        this.valueModel = aValueModel;
+        printValue();
     }
 
     @Override
     public void setSubject(ObservableCount aCount) {
-        this.count = aCount;
-        printValue();
         aCount.addCountObserver(this);
     }
 
@@ -28,13 +28,6 @@ public class DisplayStream implements CountObserver {
     }
 
     private void printValue() {
-        out.println(retrieveValue());
-    }
-
-    private String retrieveValue() {
-        if (count == null) {
-            return "";
-        }
-        return count.getCountValue().toString();
+        out.println(valueModel.getValue());
     }
 }

@@ -1,7 +1,5 @@
 package it.mondogrua.swing_count_view;
 
-import static it.mondogrua.count.Count.GET_VALUE_METHOD;
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -43,7 +41,7 @@ public class SwingBuilder implements SceneBuilder {
 
     @Override
     public void addDisplayBoxOn(int x, int y) {
-        add(makeDisplayBoxOn(observable, GET_VALUE_METHOD), x, y);
+        add(makeDisplayBoxOn(observable, count, Count.GET_VALUE_METHOD), x, y);
     }
 
     @Override
@@ -92,10 +90,11 @@ public class SwingBuilder implements SceneBuilder {
         return button;
     }
 
-    private DisplayBox makeDisplayBoxOn(Observable aObservable, String action) {
-        ValueModelAdaptor adaptor = new ValueModelAdaptor(aObservable, action,
+    private DisplayBox makeDisplayBoxOn(Observable aObservable, Object aModel,
+            String action) {
+        ValueModelAdaptor valueModel = new ValueModelAdaptor(aModel, action,
                 new Object[] {});
-        DisplayBox displayBox = new DisplayBox(adaptor);
+        DisplayBox displayBox = new DisplayBox(valueModel);
         aObservable.addObserver(displayBox);
         return displayBox;
 

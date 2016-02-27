@@ -12,12 +12,12 @@ import java.util.List;
 import it.mondogrua.count.Count;
 import it.mondogrua.count.ObservableCount;
 import it.mondogrua.utils.PluggableAdaptor;
+import it.mondogrua.utils.ValueModelAdaptor;
 
 public class ConsoleBuilder {
 
     private List<Object> components = new ArrayList<Object>();
     private ObservableCount observable;
-
     private Count count;
 
     public ConsoleBuilder(ObservableCount observable, Count aCount) {
@@ -39,12 +39,16 @@ public class ConsoleBuilder {
     }
 
     public void addDisplayStream(PrintStream out) {
-        components.add(makeDisplayStream(observable, out));
+        components.add(makeDisplayStream(out, observable,
+                Count.GET_VALUE_METHOD));
     }
 
-    private DisplayStream makeDisplayStream(ObservableCount observable,
-            PrintStream out) {
-        DisplayStream displayStream = new DisplayStream(out);
+    private DisplayStream makeDisplayStream(PrintStream out,
+            ObservableCount observable, String action) {
+        ValueModelAdaptor adaptor = new ValueModelAdaptor(observable, action,
+                new Object[] {});
+
+        DisplayStream displayStream = new DisplayStream(out, adaptor);
         displayStream.setSubject(observable);
         return displayStream;
     }

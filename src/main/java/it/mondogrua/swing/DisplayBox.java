@@ -6,21 +6,21 @@ import java.util.Observer;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-import it.mondogrua.utils.ValueModelAdaptor;
+import it.mondogrua.utils.ValueModel;
 
 @SuppressWarnings("serial")
 public class DisplayBox extends JLabel implements Observer {
 
-    private ValueModelAdaptor adaptor;
+    private ValueModel valueModel;
 
-    public DisplayBox(ValueModelAdaptor adaptor) {
-        this.adaptor = adaptor;
-        setContent(getContentFrom());
+    public DisplayBox(ValueModel aValueModel) {
+        this.valueModel = aValueModel;
+        setContent(valueModel.getValue());
     }
 
     @Override
     public void update(Observable observable, Object action) {
-        setContent(getContentFrom());
+        setContent(valueModel.getValue());
     }
 
     // Private Methods --------------------------------------------------------
@@ -33,9 +33,5 @@ public class DisplayBox extends JLabel implements Observer {
                 setText(value);
             }
         });
-    }
-
-    private String getContentFrom() {
-        return adaptor.getValue();
     }
 }
