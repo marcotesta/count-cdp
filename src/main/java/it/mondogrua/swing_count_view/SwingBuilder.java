@@ -26,12 +26,12 @@ import javafx.scene.layout.StackPane;
 public class SwingBuilder implements SceneBuilder {
 
     private JPanel panel;
-    private Observable count;
+    private Observable observable;
     private Scene scene;
 
     public SwingBuilder(Observable aCount) {
         super();
-        this.count = aCount;
+        this.observable = aCount;
     }
 
     @Override
@@ -42,22 +42,22 @@ public class SwingBuilder implements SceneBuilder {
 
     @Override
     public void addDisplayBoxOn(int x, int y) {
-        add(makeDisplayBoxOn(count, GET_VALUE_METHOD), x, y);
+        add(makeDisplayBoxOn(observable, GET_VALUE_METHOD), x, y);
     }
 
     @Override
     public void addResetButtonOn(int x, int y) {
-        add(makeButtonOn(count, "Reset", RESET_METHOD), x, y);
+        add(makeButtonOn(observable, "Reset", RESET_METHOD), x, y);
     }
 
     @Override
     public void addDecrementButtonOn(int x, int y) {
-        add(makeButtonOn(count, "Decrement", DECREMENT_METHOD), x, y);
+        add(makeButtonOn(observable, "Decrement", DECREMENT_METHOD), x, y);
     }
 
     @Override
     public void addIncrementButtonOn(int x, int y) {
-        add(makeButtonOn(count, "Increment", INCREMENT_METHOD), x, y);
+        add(makeButtonOn(observable, "Increment", INCREMENT_METHOD), x, y);
     }
 
     @Override
