@@ -34,4 +34,8 @@ public class DisplayBox extends JLabel implements Observer {
             }
         });
     }
+
+    public void bind(Observable observable) {
+        observable.addObserver(this);
+    }
 }
