@@ -11,6 +11,7 @@ import java.util.List;
 
 import it.mondogrua.count.Count;
 import it.mondogrua.utils.Observable;
+import it.mondogrua.utils.ObserverAdaptor;
 import it.mondogrua.utils.PluggableAdaptor;
 import it.mondogrua.utils.ValueModelAdaptor;
 
@@ -41,7 +42,9 @@ public class ConsoleBuilder {
     public void addDisplayStream(PrintStream out) {
         DisplayStream displayStream = makeDisplayStream(out, count,
                 Count.GET_VALUE_METHOD);
-        observable.addObserver(displayStream);
+
+        ObserverAdaptor observer = new ObserverAdaptor(displayStream, DisplayStream.PRINT_VALUE_METHOD);
+        observable.addObserver(observer);
         components.add(displayStream);
 
     }

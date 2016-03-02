@@ -2,10 +2,11 @@ package it.mondogrua.console;
 
 import java.io.PrintStream;
 
-import it.mondogrua.utils.Observer;
 import it.mondogrua.utils.ValueModel;
 
-public class DisplayStream implements Observer {
+public class DisplayStream  {
+
+    public static final String PRINT_VALUE_METHOD = "printValue";
 
     private PrintStream out;
     private ValueModel valueModel;
@@ -16,12 +17,7 @@ public class DisplayStream implements Observer {
         printValue();
     }
 
-    @Override
-    public void update() {
-        printValue();
-    }
-
-    private void printValue() {
+    public void printValue() {
         out.println(valueModel.getValue());
     }
 }
