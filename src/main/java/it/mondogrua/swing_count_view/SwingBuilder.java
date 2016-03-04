@@ -5,7 +5,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Observable;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -14,6 +13,8 @@ import javax.swing.JPanel;
 import it.mondogrua.count.Count;
 import it.mondogrua.countapp.SceneBuilder;
 import it.mondogrua.swing.DisplayBox;
+import it.mondogrua.swing.JavaUtilsObservableCount;
+import it.mondogrua.swing.JavaUtilsObservableValueModel;
 import it.mondogrua.utils.PluggableAdaptor;
 import it.mondogrua.utils.ValueModelAdaptor;
 import javafx.embed.swing.SwingNode;
@@ -23,14 +24,13 @@ import javafx.scene.layout.StackPane;
 public class SwingBuilder implements SceneBuilder {
 
     private JPanel panel;
-    private Observable observable;
-    private Count count;
     private Scene scene;
+    private JavaUtilsObservableCount count;
 
-    public SwingBuilder(Observable anObservable, Count count) {
+    public SwingBuilder(JavaUtilsObservableCount aCount) {
         super();
-        this.observable = anObservable;
-        this.count = count;
+
+        this.count = aCount;
     }
 
     @Override
@@ -41,10 +41,9 @@ public class SwingBuilder implements SceneBuilder {
 
     @Override
     public void addDisplayBoxOn(int x, int y) {
-        DisplayBox displayBox = makeDisplayBoxOn(count, Count.GET_VALUE_METHOD);
-        displayBox.bind(observable);
+        DisplayBox displayBox = makeDisplayBoxOn();
+        displayBox.bind(new JavaUtilsObservableValueModel(count, new ValueModelAdaptor(count, Count.GET_VALUE_METHOD, new Object[] {})));
         add(displayBox, x, y);
-
     }
 
     @Override
@@ -93,11 +92,8 @@ public class SwingBuilder implements SceneBuilder {
         return button;
     }
 
-    private DisplayBox makeDisplayBoxOn(Object aModel, String action) {
-        ValueModelAdaptor valueModel = new ValueModelAdaptor(aModel, action,
-                new Object[] {});
-        return new DisplayBox(valueModel);
-
+    private DisplayBox makeDisplayBoxOn() {
+        return new DisplayBox();
     }
 
     private GridBagConstraints makeConstraintFrame(int x, int y) {

@@ -13,9 +13,13 @@ public class DisplayBox extends JLabel implements Observer {
 
     private ValueModel valueModel;
 
-    public DisplayBox(ValueModel aValueModel) {
+    public DisplayBox() {
+    }
+
+    public void bind(JavaUtilsObservableValueModel aValueModel) {
         this.valueModel = aValueModel;
         setContent(valueModel.getValue());
+        aValueModel.addObserver(this);
     }
 
     @Override
@@ -33,9 +37,5 @@ public class DisplayBox extends JLabel implements Observer {
                 setText(value);
             }
         });
-    }
-
-    public void bind(Observable observable) {
-        observable.addObserver(this);
     }
 }
