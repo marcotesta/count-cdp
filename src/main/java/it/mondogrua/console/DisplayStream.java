@@ -4,7 +4,7 @@ import java.io.PrintStream;
 
 import it.mondogrua.utils.ValueModel;
 
-public class DisplayStream  {
+public class DisplayStream {
 
     public static final String PRINT_VALUE_METHOD = "printValue";
 

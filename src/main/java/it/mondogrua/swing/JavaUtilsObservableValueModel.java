@@ -5,13 +5,14 @@ import java.util.Observer;
 
 import it.mondogrua.utils.ValueModel;
 
-
-public class JavaUtilsObservableValueModel extends Observable implements ValueModel {
+public class JavaUtilsObservableValueModel extends Observable implements
+        ValueModel {
 
     private ValueModel valueModel;
     private Observable observable;
 
-    public JavaUtilsObservableValueModel(Observable anObservable, ValueModel valueModel) {
+    public JavaUtilsObservableValueModel(Observable anObservable,
+            ValueModel valueModel) {
         super();
         this.observable = anObservable;
         this.valueModel = valueModel;
@@ -48,7 +49,7 @@ public class JavaUtilsObservableValueModel extends Observable implements ValueMo
     }
 
     @Override
-    public  boolean hasChanged() {
+    public boolean hasChanged() {
         return observable.hasChanged();
     }
 

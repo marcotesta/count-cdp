@@ -39,7 +39,8 @@ public class CountApp extends Application {
         ValueModel valueModel = new ValueModelAdaptor(count,
                 Count.GET_VALUE_METHOD);
         SimpleStringPropertyToMgObserverObservableAdapter propertyObsObsAdapter =
-                new SimpleStringPropertyToMgObserverObservableAdapter(valueModel);
+                new SimpleStringPropertyToMgObserverObservableAdapter(
+                        valueModel);
         count.addObserver(propertyObsObsAdapter);
 
         InputStream fileInputStream = new FileInputStream("count-input.txt");
@@ -65,8 +66,9 @@ public class CountApp extends Application {
         setupStage(new Stage(), "Alternative JavaFX DateCount Example",
                 new AltJFXBuilder(propertyObsObsAdapter, count), 500, 500);
 
-        setupStage(new Stage(), "SWING DateCount Example",
-                new SwingBuilder(new JavaUtilsObservableCount(javaUtilsObsObsAdapter, count)), 900, 500);
+        setupStage(new Stage(), "SWING DateCount Example", new SwingBuilder(
+                new JavaUtilsObservableCount(javaUtilsObsObsAdapter, count)),
+                900, 500);
     }
 
     private void setupStage(Stage stage, String lable, SceneBuilder builder,

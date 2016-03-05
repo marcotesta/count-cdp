@@ -61,7 +61,7 @@ public class JavaUtilsObservableCount extends Observable implements Count {
     }
 
     @Override
-    public  boolean hasChanged() {
+    public boolean hasChanged() {
         return observable.hasChanged();
     }
 
@@ -69,5 +69,4 @@ public class JavaUtilsObservableCount extends Observable implements Count {
     public int countObservers() {
         return observable.countObservers();
     }
-
 }
