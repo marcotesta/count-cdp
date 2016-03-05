@@ -16,6 +16,10 @@ public class PluggableAdaptor {
         this.parameters = someParameters;
     }
 
+    public PluggableAdaptor(Object aModel, String anAction) {
+        this(aModel, anAction, new Object[] {});
+    }
+
     public Object execute() {
         Method method;
         try {

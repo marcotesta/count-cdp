@@ -76,9 +76,7 @@ public class JFXBuilder implements SceneBuilder {
     }
 
     private Button makeButtonOn(Object aModel, String label, String anAction) {
-
-        PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction,
-                new Object[] {});
+        PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction);
         Button button = new Button(label);
         button.setOnAction(new EventHandler<ActionEvent>() {
 

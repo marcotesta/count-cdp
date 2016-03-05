@@ -42,7 +42,8 @@ public class SwingBuilder implements SceneBuilder {
     @Override
     public void addDisplayBoxOn(int x, int y) {
         DisplayBox displayBox = makeDisplayBoxOn();
-        displayBox.bind(new JavaUtilsObservableValueModel(count, new ValueModelAdaptor(count, Count.GET_VALUE_METHOD)));
+        displayBox.bind(new JavaUtilsObservableValueModel(count,
+                new ValueModelAdaptor(count, Count.GET_VALUE_METHOD)));
         add(displayBox, x, y);
     }
 
@@ -78,8 +79,7 @@ public class SwingBuilder implements SceneBuilder {
     }
 
     private JButton makeButtonOn(Object aModel, String label, String anAction) {
-        PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction,
-                new Object[] {});
+        PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction);
         JButton button = new JButton(label);
         button.addActionListener(new ActionListener() {
 

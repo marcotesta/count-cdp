@@ -57,8 +57,7 @@ public class ConsoleBuilder {
 
     private StreamListener makeStreamListenerOn(Object aModel, String anAction,
             String regex, InputStream in) {
-        PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction,
-                new Object[] {});
+        PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction);
         return new StreamListener(aCommand, in, regex);
     }
 
