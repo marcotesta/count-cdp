@@ -11,6 +11,7 @@ import it.mondogrua.count.DateCount;
 import it.mondogrua.count.ObservableCount;
 import it.mondogrua.javafx_count_view.AltJFXBuilder;
 import it.mondogrua.javafx_count_view.JFXBuilder;
+import it.mondogrua.javafx_count_view.SimpleStringPropertyCount;
 import it.mondogrua.swing_count_view.JavaUtilsObservableCount;
 import it.mondogrua.swing_count_view.SwingBuilder;
 import it.mondogrua.utils.InputStreamSplitter;
@@ -61,10 +62,14 @@ public class CountApp extends Application {
         consoleBuilder.addResetStreamListener("r", resetIn);
         consoleBuilder.addDisplayStream(out);
 
+        SimpleStringPropertyCount simpleStringPropertyCount =
+                SimpleStringPropertyCount.create(
+                        propertyObsObsAdapter, count);
+
         setupStage(primaryStage, "JavaFX DateCount Example", new JFXBuilder(
-                propertyObsObsAdapter, count), 100, 500);
+                simpleStringPropertyCount), 100, 500);
         setupStage(new Stage(), "Alternative JavaFX DateCount Example",
-                new AltJFXBuilder(propertyObsObsAdapter, count), 500, 500);
+                new AltJFXBuilder(simpleStringPropertyCount), 500, 500);
 
         setupStage(new Stage(), "SWING DateCount Example", new SwingBuilder(
                 new JavaUtilsObservableCount(javaUtilsObsObsAdapter, count)),

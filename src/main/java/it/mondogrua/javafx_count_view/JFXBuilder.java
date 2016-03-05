@@ -4,7 +4,6 @@ import it.mondogrua.count.Count;
 import it.mondogrua.countapp.SceneBuilder;
 import it.mondogrua.javafx.JFXDisplayBox;
 import it.mondogrua.utils.PluggableAdaptor;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,12 +16,10 @@ import javafx.scene.layout.GridPane;
 public class JFXBuilder implements SceneBuilder {
 
     private GridPane pane;
-    protected SimpleStringProperty observable;
-    private Count count;
     private Scene scene;
+    protected SimpleStringPropertyCount count;
 
-    public JFXBuilder(SimpleStringProperty aObservable, Count aCount) {
-        this.observable = aObservable;
+    public JFXBuilder(SimpleStringPropertyCount aCount) {
         this.count = aCount;
     }
 
@@ -34,7 +31,7 @@ public class JFXBuilder implements SceneBuilder {
     @Override
     public void addDisplayBoxOn(int x, int y) {
         JFXDisplayBox displayBox = makeDisplayBoxOn();
-        displayBox.bind(observable);
+        displayBox.bind(count);
         add(displayBox, x, y);
     }
 
