@@ -1,4 +1,4 @@
-package it.mondogrua.swing;
+package it.mondogrua.swing_count_view;
 
 import java.util.Observable;
 import java.util.Observer;

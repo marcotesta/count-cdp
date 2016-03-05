@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import it.mondogrua.count.Count;
 import it.mondogrua.countapp.SceneBuilder;
 import it.mondogrua.swing.DisplayBox;
-import it.mondogrua.swing.JavaUtilsObservableCount;
 import it.mondogrua.swing.JavaUtilsObservableValueModel;
 import it.mondogrua.utils.PluggableAdaptor;
 import it.mondogrua.utils.ValueModelAdaptor;

@@ -11,7 +11,7 @@ import it.mondogrua.count.DateCount;
 import it.mondogrua.count.ObservableCount;
 import it.mondogrua.javafx_count_view.AltJFXBuilder;
 import it.mondogrua.javafx_count_view.JFXBuilder;
-import it.mondogrua.swing.JavaUtilsObservableCount;
+import it.mondogrua.swing_count_view.JavaUtilsObservableCount;
 import it.mondogrua.swing_count_view.SwingBuilder;
 import it.mondogrua.utils.InputStreamSplitter;
 import it.mondogrua.utils.JavaUtilsToMgObserverObservableAdapter;
