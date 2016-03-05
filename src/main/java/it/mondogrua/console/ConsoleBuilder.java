@@ -13,6 +13,7 @@ import it.mondogrua.count.Count;
 import it.mondogrua.utils.Observable;
 import it.mondogrua.utils.ObserverAdaptor;
 import it.mondogrua.utils.PluggableAdaptor;
+import it.mondogrua.utils.ValueModel;
 import it.mondogrua.utils.ValueModelAdaptor;
 
 public class ConsoleBuilder {
@@ -43,25 +44,21 @@ public class ConsoleBuilder {
         DisplayStream displayStream = makeDisplayStream(out, count,
                 Count.GET_VALUE_METHOD);
 
-        ObserverAdaptor observer = new ObserverAdaptor(displayStream, DisplayStream.PRINT_VALUE_METHOD);
-        observable.addObserver(observer);
+        observable.addObserver(new ObserverAdaptor(displayStream,
+                DisplayStream.PRINT_VALUE_METHOD));
         components.add(displayStream);
-
     }
 
     private DisplayStream makeDisplayStream(PrintStream out, Object aModel,
             String action) {
-        ValueModelAdaptor adaptor = new ValueModelAdaptor(aModel, action);
-
-        DisplayStream displayStream = new DisplayStream(out, adaptor);
-        return displayStream;
+        ValueModel aValueModel = new ValueModelAdaptor(aModel, action);
+        return new DisplayStream(out, aValueModel);
     }
 
     private StreamListener makeStreamListenerOn(Object aModel, String anAction,
             String regex, InputStream in) {
         PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction,
                 new Object[] {});
-
         return new StreamListener(aCommand, in, regex);
     }
 
