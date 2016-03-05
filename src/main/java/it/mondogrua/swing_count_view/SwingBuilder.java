@@ -12,21 +12,18 @@ import javax.swing.JPanel;
 
 import it.mondogrua.count.Count;
 import it.mondogrua.countapp.SceneBuilder;
-import it.mondogrua.swing.DisplayBox;
-import it.mondogrua.swing.JavaUtilsObservableValueModel;
 import it.mondogrua.utils.PluggableAdaptor;
-import it.mondogrua.utils.ValueModelAdaptor;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
-public class SwingBuilder implements SceneBuilder {
+public abstract class SwingBuilder implements SceneBuilder {
 
     private JPanel panel;
     private Scene scene;
-    private JavaUtilsObservableCount count;
+    private Count count;
 
-    public SwingBuilder(JavaUtilsObservableCount aCount) {
+    public SwingBuilder(Count aCount) {
         super();
 
         this.count = aCount;
@@ -39,12 +36,7 @@ public class SwingBuilder implements SceneBuilder {
     }
 
     @Override
-    public void addDisplayBoxOn(int x, int y) {
-        DisplayBox displayBox = makeDisplayBoxOn();
-        displayBox.bind(new JavaUtilsObservableValueModel(count,
-                new ValueModelAdaptor(count, Count.GET_VALUE_METHOD)));
-        add(displayBox, x, y);
-    }
+    abstract public void addDisplayBoxOn(int x, int y);
 
     @Override
     public void addResetButtonOn(int x, int y) {
@@ -77,7 +69,8 @@ public class SwingBuilder implements SceneBuilder {
         return scene;
     }
 
-    private JButton makeButtonOn(Object aModel, String label, String anAction) {
+    protected JButton makeButtonOn(Object aModel, String label,
+            String anAction) {
         PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction);
         JButton button = new JButton(label);
         button.addActionListener(new ActionListener() {
@@ -91,11 +84,7 @@ public class SwingBuilder implements SceneBuilder {
         return button;
     }
 
-    private DisplayBox makeDisplayBoxOn() {
-        return new DisplayBox();
-    }
-
-    private GridBagConstraints makeConstraintFrame(int x, int y) {
+    protected GridBagConstraints makeConstraintFrame(int x, int y) {
         GridBagConstraints constraintFrame = new GridBagConstraints();
         constraintFrame.insets = new Insets(5, 5, 5, 5);
         constraintFrame.gridx = x;
@@ -103,7 +92,7 @@ public class SwingBuilder implements SceneBuilder {
         return constraintFrame;
     }
 
-    private void add(JComponent node, int x, int y) {
+    protected void add(JComponent node, int x, int y) {
         panel.add(node, makeConstraintFrame(x, y));
     }
 }

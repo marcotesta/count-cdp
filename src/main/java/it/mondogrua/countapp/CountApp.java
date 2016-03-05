@@ -12,8 +12,11 @@ import it.mondogrua.count.ObservableCount;
 import it.mondogrua.javafx_count_view.AltJFXBuilder;
 import it.mondogrua.javafx_count_view.JFXBuilder;
 import it.mondogrua.javafx_count_view.SimpleStringPropertyCount;
+import it.mondogrua.swing_count_view.BoundPropertyCount;
+import it.mondogrua.swing_count_view.BoundPropertyCountSwingBuilder;
 import it.mondogrua.swing_count_view.JavaUtilsObservableCount;
-import it.mondogrua.swing_count_view.SwingBuilder;
+import it.mondogrua.swing_count_view.JavaUtilsObservableCountSwingBuilder;
+import it.mondogrua.utils.BoundPropertyToMgObserverObservableAdapter;
 import it.mondogrua.utils.InputStreamSplitter;
 import it.mondogrua.utils.JavaUtilsToMgObserverObservableAdapter;
 import it.mondogrua.utils.SimpleStringPropertyToMgObserverObservableAdapter;
@@ -36,6 +39,10 @@ public class CountApp extends Application {
         JavaUtilsToMgObserverObservableAdapter javaUtilsObsObsAdapter =
                 new JavaUtilsToMgObserverObservableAdapter();
         count.addObserver(javaUtilsObsObsAdapter);
+
+        BoundPropertyToMgObserverObservableAdapter boundPropertyObsObsAdapter =
+                new BoundPropertyToMgObserverObservableAdapter();
+        count.addObserver(boundPropertyObsObsAdapter);
 
         ValueModel valueModel = new ValueModelAdaptor(count,
                 Count.GET_VALUE_METHOD);
@@ -63,17 +70,21 @@ public class CountApp extends Application {
         consoleBuilder.addDisplayStream(out);
 
         SimpleStringPropertyCount simpleStringPropertyCount =
-                SimpleStringPropertyCount.create(
-                        propertyObsObsAdapter, count);
+                SimpleStringPropertyCount.create(propertyObsObsAdapter, count);
+        JavaUtilsObservableCount javaUtilsObservableCount =
+                new JavaUtilsObservableCount(javaUtilsObsObsAdapter, count);
+        BoundPropertyCount boundPropertyCount = new BoundPropertyCount(
+                boundPropertyObsObsAdapter, count);
 
         setupStage(primaryStage, "JavaFX DateCount Example", new JFXBuilder(
                 simpleStringPropertyCount), 100, 500);
         setupStage(new Stage(), "Alternative JavaFX DateCount Example",
                 new AltJFXBuilder(simpleStringPropertyCount), 500, 500);
-
-        setupStage(new Stage(), "SWING DateCount Example", new SwingBuilder(
-                new JavaUtilsObservableCount(javaUtilsObsObsAdapter, count)),
-                900, 500);
+        setupStage(new Stage(), "SWING DateCount Example",
+                new JavaUtilsObservableCountSwingBuilder(
+                        javaUtilsObservableCount), 900, 500);
+        setupStage(new Stage(), "Alternative SWING DateCount Example",
+                new BoundPropertyCountSwingBuilder(boundPropertyCount), 1300, 500);
     }
 
     private void setupStage(Stage stage, String lable, SceneBuilder builder,
