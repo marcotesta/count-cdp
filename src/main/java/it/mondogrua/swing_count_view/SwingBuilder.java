@@ -42,7 +42,7 @@ public class SwingBuilder implements SceneBuilder {
     @Override
     public void addDisplayBoxOn(int x, int y) {
         DisplayBox displayBox = makeDisplayBoxOn();
-        displayBox.bind(new JavaUtilsObservableValueModel(count, new ValueModelAdaptor(count, Count.GET_VALUE_METHOD, new Object[] {})));
+        displayBox.bind(new JavaUtilsObservableValueModel(count, new ValueModelAdaptor(count, Count.GET_VALUE_METHOD)));
         add(displayBox, x, y);
     }
 

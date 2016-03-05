@@ -51,8 +51,7 @@ public class ConsoleBuilder {
 
     private DisplayStream makeDisplayStream(PrintStream out, Object aModel,
             String action) {
-        ValueModelAdaptor adaptor = new ValueModelAdaptor(aModel, action,
-                new Object[] {});
+        ValueModelAdaptor adaptor = new ValueModelAdaptor(aModel, action);
 
         DisplayStream displayStream = new DisplayStream(out, adaptor);
         return displayStream;

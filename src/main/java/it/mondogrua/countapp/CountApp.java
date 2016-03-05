@@ -37,7 +37,7 @@ public class CountApp extends Application {
         count.addObserver(javaUtilsObsObsAdapter);
 
         ValueModel valueModel = new ValueModelAdaptor(count,
-                Count.GET_VALUE_METHOD, new Object[] {});
+                Count.GET_VALUE_METHOD);
         SimpleStringPropertyToMgObserverObservableAdapter propertyObsObsAdapter =
                 new SimpleStringPropertyToMgObserverObservableAdapter(valueModel);
         count.addObserver(propertyObsObsAdapter);
