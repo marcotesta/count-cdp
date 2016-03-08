@@ -8,10 +8,15 @@ import javax.swing.SwingUtilities;
 
 import it.mondogrua.utils.ValueModel;
 
-@SuppressWarnings("serial")
-public class AltDisplayBox extends JLabel implements PropertyChangeListener {
+public class PropertyChangeListenerJLableAdapter implements PropertyChangeListener {
 
+    private JLabel label;
     private ValueModel valueModel;
+
+    public PropertyChangeListenerJLableAdapter(JLabel label) {
+        super();
+        this.label = label;
+    }
 
     public void bind(BoundPropertyValueModel aValueModel) {
         this.valueModel = aValueModel;
@@ -31,7 +36,7 @@ public class AltDisplayBox extends JLabel implements PropertyChangeListener {
 
             @Override
             public void run() {
-                setText(value);
+                label.setText(value);
             }
         });
     }
