@@ -21,10 +21,10 @@ public class BoundPropertyCountSwingBuilder extends SwingBuilder {
         JLabel label = new JLabel();
         PropertyChangeListenerJLableAdapter jLableAdapter = makeJLableAdapter(label);
 
-        BoundPropertyValueModel aValueModel = new BoundPropertyValueModel(count,
+        BoundPropertyValueModel valueModel = new BoundPropertyValueModel(count,
                 new ValueModelAdaptor(count, Count.GET_VALUE_METHOD));
 
-        jLableAdapter.bind(aValueModel);
+        jLableAdapter.bind(valueModel);
         add(label, x, y);
     }
 
