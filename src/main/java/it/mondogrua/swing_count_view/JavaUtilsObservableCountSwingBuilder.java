@@ -5,7 +5,7 @@ import it.mondogrua.swing.DisplayBox;
 import it.mondogrua.swing.JavaUtilsObservableValueModel;
 import it.mondogrua.utils.ValueModelAdaptor;
 
-public class JavaUtilsObservableCountSwingBuilder extends SwingBuilder {
+public class JavaUtilsObservableCountSwingBuilder extends CountSwingBuilder {
 
     private JavaUtilsObservableCount count;
 

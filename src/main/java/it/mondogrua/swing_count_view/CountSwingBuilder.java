@@ -17,13 +17,13 @@ import javafx.embed.swing.SwingNode;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 
-public abstract class SwingBuilder implements SceneBuilder {
+public abstract class CountSwingBuilder implements SceneBuilder {
 
     private JPanel panel;
     private Scene scene;
     private Count count;
 
-    public SwingBuilder(Count aCount) {
+    public CountSwingBuilder(Count aCount) {
         super();
 
         this.count = aCount;

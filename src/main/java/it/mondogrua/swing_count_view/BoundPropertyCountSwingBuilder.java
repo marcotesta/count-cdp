@@ -7,7 +7,7 @@ import it.mondogrua.swing.PropertyChangeListenerJLableAdapter;
 import it.mondogrua.swing.BoundPropertyValueModel;
 import it.mondogrua.utils.ValueModelAdaptor;
 
-public class BoundPropertyCountSwingBuilder extends SwingBuilder {
+public class BoundPropertyCountSwingBuilder extends CountSwingBuilder {
 
     private BoundPropertyCount count;
 
