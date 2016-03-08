@@ -1,7 +1,9 @@
 package it.mondogrua.swing_count_view;
 
+import javax.swing.JLabel;
+
 import it.mondogrua.count.Count;
-import it.mondogrua.swing.DisplayBox;
+import it.mondogrua.swing.JavaUtilsObserverJLabelAdapter;
 import it.mondogrua.swing.JavaUtilsObservableValueModel;
 import it.mondogrua.utils.ValueModelAdaptor;
 
@@ -17,13 +19,15 @@ public class JavaUtilsObservableCountSwingBuilder extends CountSwingBuilder {
 
     @Override
     public void addDisplayBoxOn(int x, int y) {
-        DisplayBox displayBox = makeDisplayBoxOn();
-        displayBox.bind(new JavaUtilsObservableValueModel(count,
-                new ValueModelAdaptor(count, Count.GET_VALUE_METHOD)));
-        add(displayBox, x, y);
+        JLabel label = new JLabel();
+        JavaUtilsObserverJLabelAdapter jLableAdapter = makeJLableAdapter(label);
+        JavaUtilsObservableValueModel valueModel = new JavaUtilsObservableValueModel(count,
+                new ValueModelAdaptor(count, Count.GET_VALUE_METHOD));
+        jLableAdapter.bind(valueModel);
+        add(label, x, y);
     }
 
-    private DisplayBox makeDisplayBoxOn() {
-        return new DisplayBox();
+    private JavaUtilsObserverJLabelAdapter makeJLableAdapter(JLabel label) {
+        return new JavaUtilsObserverJLabelAdapter(label);
     }
 }

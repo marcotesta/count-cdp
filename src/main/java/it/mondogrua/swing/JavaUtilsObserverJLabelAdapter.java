@@ -8,12 +8,13 @@ import javax.swing.SwingUtilities;
 
 import it.mondogrua.utils.ValueModel;
 
-@SuppressWarnings("serial")
-public class DisplayBox extends JLabel implements Observer {
+public class JavaUtilsObserverJLabelAdapter implements Observer {
 
+    private JLabel label;
     private ValueModel valueModel;
 
-    public DisplayBox() {
+    public JavaUtilsObserverJLabelAdapter(JLabel aLabel) {
+        label = aLabel;
     }
 
     public void bind(JavaUtilsObservableValueModel aValueModel) {
@@ -34,7 +35,7 @@ public class DisplayBox extends JLabel implements Observer {
 
             @Override
             public void run() {
-                setText(value);
+                label.setText(value);
             }
         });
     }
