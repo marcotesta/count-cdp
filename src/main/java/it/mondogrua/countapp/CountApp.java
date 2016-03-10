@@ -1,6 +1,7 @@
 package it.mondogrua.countapp;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -20,7 +21,6 @@ import it.mondogrua.utils.BoundPropertyToMgObserverObservableAdapter;
 import it.mondogrua.utils.InputStreamSplitter;
 import it.mondogrua.utils.JavaUtilsToMgObserverObservableAdapter;
 import it.mondogrua.utils.SimpleStringPropertyToMgObserverObservableAdapter;
-import it.mondogrua.utils.ValueModel;
 import it.mondogrua.utils.ValueModelAdaptor;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -36,21 +36,62 @@ public class CountApp extends Application {
     private void configureCountApp(Stage primaryStage) throws IOException {
         ObservableCount count = new ObservableCount(new DateCount());
 
-        JavaUtilsToMgObserverObservableAdapter javaUtilsObsObsAdapter =
-                new JavaUtilsToMgObserverObservableAdapter();
-        count.addObserver(javaUtilsObsObsAdapter);
+        //
+        JavaUtilsObservableCount javaUtilsObservableCount =
+                createJavaUtilsObservableCount(count);
+        JavaUtilsObservableCountSwingBuilder javaUtilsObservableCountSwingBuilder =
+                new JavaUtilsObservableCountSwingBuilder(javaUtilsObservableCount);
+        setupStage(new Stage(), "SWING DateCount Example",
+                javaUtilsObservableCountSwingBuilder, 900, 500);
 
+        //
+        BoundPropertyCount boundPropertyCount = createBoundPropertyCount(count);
+        BoundPropertyCountSwingBuilder boundPropertyCountSwingBuilder =
+                new BoundPropertyCountSwingBuilder(boundPropertyCount);
+        setupStage(new Stage(), "Alternative SWING DateCount Example",
+                boundPropertyCountSwingBuilder, 1300, 500);
+
+        //
+        SimpleStringPropertyCount simpleStringPropertyCount =
+                createSimpleStringPropertyCount(count);
+        JFXBuilder jfxBuilder = new JFXBuilder(simpleStringPropertyCount);
+        setupStage(primaryStage, "JavaFX DateCount Example", jfxBuilder, 100, 500);
+        AltJFXBuilder altJFXBuilder = new AltJFXBuilder(simpleStringPropertyCount);
+        setupStage(new Stage(), "Alternative JavaFX DateCount Example", altJFXBuilder, 500, 500);
+
+        //
+        setupConsole(count);
+    }
+
+    private SimpleStringPropertyCount createSimpleStringPropertyCount(ObservableCount count) {
+        SimpleStringPropertyToMgObserverObservableAdapter simpleStringPropertyObsObsAdapter =
+                new SimpleStringPropertyToMgObserverObservableAdapter(
+                        new ValueModelAdaptor(count, Count.GET_VALUE_METHOD));
+        count.addObserver(simpleStringPropertyObsObsAdapter);
+        SimpleStringPropertyCount simpleStringPropertyCount =
+                SimpleStringPropertyCount.create(simpleStringPropertyObsObsAdapter, count);
+        return simpleStringPropertyCount;
+    }
+
+    private BoundPropertyCount createBoundPropertyCount(ObservableCount count) {
         BoundPropertyToMgObserverObservableAdapter boundPropertyObsObsAdapter =
                 new BoundPropertyToMgObserverObservableAdapter();
         count.addObserver(boundPropertyObsObsAdapter);
+        BoundPropertyCount boundPropertyCount = new BoundPropertyCount(
+                boundPropertyObsObsAdapter, count);
+        return boundPropertyCount;
+    }
 
-        ValueModel valueModel = new ValueModelAdaptor(count,
-                Count.GET_VALUE_METHOD);
-        SimpleStringPropertyToMgObserverObservableAdapter propertyObsObsAdapter =
-                new SimpleStringPropertyToMgObserverObservableAdapter(
-                        valueModel);
-        count.addObserver(propertyObsObsAdapter);
+    private JavaUtilsObservableCount createJavaUtilsObservableCount(ObservableCount count) {
+        JavaUtilsToMgObserverObservableAdapter javaUtilsObsObsAdapter =
+                new JavaUtilsToMgObserverObservableAdapter();
+        count.addObserver(javaUtilsObsObsAdapter);
+        JavaUtilsObservableCount javaUtilsObservableCount =
+                new JavaUtilsObservableCount(javaUtilsObsObsAdapter, count);
+        return javaUtilsObservableCount;
+    }
 
+    private void setupConsole(ObservableCount count) throws FileNotFoundException, IOException {
         InputStream fileInputStream = new FileInputStream("count-input.txt");
         InputStream systemInputStream = System.in;
         InputStreamSplitter streamSplitter = new InputStreamSplitter(
@@ -68,23 +109,6 @@ public class CountApp extends Application {
         consoleBuilder.addDecrementStreamListener("-", decrementIn);
         consoleBuilder.addResetStreamListener("r", resetIn);
         consoleBuilder.addDisplayStream(out);
-
-        SimpleStringPropertyCount simpleStringPropertyCount =
-                SimpleStringPropertyCount.create(propertyObsObsAdapter, count);
-        JavaUtilsObservableCount javaUtilsObservableCount =
-                new JavaUtilsObservableCount(javaUtilsObsObsAdapter, count);
-        BoundPropertyCount boundPropertyCount = new BoundPropertyCount(
-                boundPropertyObsObsAdapter, count);
-
-        setupStage(primaryStage, "JavaFX DateCount Example", new JFXBuilder(
-                simpleStringPropertyCount), 100, 500);
-        setupStage(new Stage(), "Alternative JavaFX DateCount Example",
-                new AltJFXBuilder(simpleStringPropertyCount), 500, 500);
-        setupStage(new Stage(), "SWING DateCount Example",
-                new JavaUtilsObservableCountSwingBuilder(
-                        javaUtilsObservableCount), 900, 500);
-        setupStage(new Stage(), "Alternative SWING DateCount Example",
-                new BoundPropertyCountSwingBuilder(boundPropertyCount), 1300, 500);
     }
 
     private void setupStage(Stage stage, String lable, SceneBuilder builder,
