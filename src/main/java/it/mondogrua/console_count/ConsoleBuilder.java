@@ -1,4 +1,4 @@
-package it.mondogrua.console;
+package it.mondogrua.console_count;
 
 import static it.mondogrua.count.Count.DECREMENT_METHOD;
 import static it.mondogrua.count.Count.INCREMENT_METHOD;

@@ -1,4 +1,4 @@
-package it.mondogrua.console;
+package it.mondogrua.console_count;
 
 import java.io.InputStream;
 import java.util.Scanner;

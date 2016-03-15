@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-import it.mondogrua.console.ConsoleBuilder;
+import it.mondogrua.console_count.ConsoleBuilder;
 import it.mondogrua.count.Count;
 import it.mondogrua.count.DateCount;
 import it.mondogrua.count.ObservableCount;
