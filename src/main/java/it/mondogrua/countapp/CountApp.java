@@ -103,7 +103,7 @@ public class CountApp extends Application {
 
         PrintStream out = System.out;
 
-        ConsoleBuilder consoleBuilder = new ConsoleBuilder(count, count);
+        ConsoleBuilder consoleBuilder = new ConsoleBuilder(count);
         consoleBuilder.addIncrementStreamListener("+", fileInputStream);
         consoleBuilder.addIncrementStreamListener("+", incrementIn);
         consoleBuilder.addDecrementStreamListener("-", decrementIn);

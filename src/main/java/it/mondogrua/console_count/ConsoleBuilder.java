@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.mondogrua.count.Count;
+import it.mondogrua.count.ObservableCount;
 import it.mondogrua.utils.Observable;
 import it.mondogrua.utils.ObserverAdaptor;
 import it.mondogrua.utils.PluggableAdaptor;
@@ -19,12 +20,10 @@ import it.mondogrua.utils.ValueModelAdaptor;
 public class ConsoleBuilder {
 
     private List<Object> components = new ArrayList<Object>();
-    private Observable observable;
-    private Count count;
+    private ObservableCount count;
 
-    public ConsoleBuilder(Observable observable, Count aCount) {
+    public ConsoleBuilder(ObservableCount aCount) {
         super();
-        this.observable = observable;
         this.count = aCount;
     }
 
@@ -44,7 +43,7 @@ public class ConsoleBuilder {
         DisplayStream displayStream = makeDisplayStream(out, count,
                 Count.GET_VALUE_METHOD);
 
-        observable.addObserver(new ObserverAdaptor(displayStream,
+        count.addObserver(new ObserverAdaptor(displayStream,
                 DisplayStream.PRINT_VALUE_METHOD));
         components.add(displayStream);
     }
