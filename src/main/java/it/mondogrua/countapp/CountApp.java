@@ -1,10 +1,13 @@
 package it.mondogrua.countapp;
 
-import java.io.FileInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
 
 import it.mondogrua.console_count.ConsoleBuilder;
 import it.mondogrua.count.Count;
@@ -18,8 +21,8 @@ import it.mondogrua.swing_count_view.BoundPropertyCountSwingBuilder;
 import it.mondogrua.swing_count_view.JavaUtilsObservableCount;
 import it.mondogrua.swing_count_view.JavaUtilsObservableCountSwingBuilder;
 import it.mondogrua.utils.BoundPropertyToMgObserverObservableAdapter;
-import it.mondogrua.utils.InputStreamSplitter;
 import it.mondogrua.utils.JavaUtilsToMgObserverObservableAdapter;
+import it.mondogrua.utils.ReaderSplitter;
 import it.mondogrua.utils.SimpleStringPropertyToMgObserverObservableAdapter;
 import it.mondogrua.utils.ValueModelAdaptor;
 import javafx.application.Application;
@@ -92,16 +95,16 @@ public class CountApp extends Application {
     }
 
     private void setupConsole(ObservableCount count) throws FileNotFoundException, IOException {
-        InputStream fileInputStream = new FileInputStream("count-input.txt");
-        InputStream systemInputStream = System.in;
-        InputStreamSplitter streamSplitter = new InputStreamSplitter(
-                systemInputStream);
-        InputStream incrementIn = streamSplitter.split();
-        InputStream decrementIn = streamSplitter.split();
-        InputStream resetIn = streamSplitter.split();
+        BufferedReader fileInputStream = new BufferedReader(new FileReader("count-input.txt"));
+        Reader systemInput = new InputStreamReader(System.in);
+        ReaderSplitter streamSplitter = new ReaderSplitter(
+                systemInput);
+        BufferedReader incrementIn = new BufferedReader(streamSplitter.split());
+        BufferedReader decrementIn = new BufferedReader(streamSplitter.split());
+        BufferedReader resetIn = new BufferedReader(streamSplitter.split());
         streamSplitter.start();
 
-        PrintStream out = System.out;
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
 
         ConsoleBuilder consoleBuilder = new ConsoleBuilder(count);
         consoleBuilder.addIncrementStreamListener("+", fileInputStream);
