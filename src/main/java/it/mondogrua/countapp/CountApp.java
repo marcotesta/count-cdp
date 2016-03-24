@@ -95,7 +95,7 @@ public class CountApp extends Application {
     }
 
     private void setupConsole(ObservableCount count) throws FileNotFoundException, IOException {
-        BufferedReader fileInputStream = new BufferedReader(new FileReader("count-input.txt"));
+        BufferedReader fileReader = new BufferedReader(new FileReader("count-input.txt"));
         Reader systemInput = new InputStreamReader(System.in);
         ReaderSplitter streamSplitter = new ReaderSplitter(
                 systemInput);
@@ -107,7 +107,7 @@ public class CountApp extends Application {
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
 
         ConsoleBuilder consoleBuilder = new ConsoleBuilder(count);
-        consoleBuilder.addIncrementStreamListener("+", fileInputStream);
+        consoleBuilder.addIncrementStreamListener("+", fileReader);
         consoleBuilder.addIncrementStreamListener("+", incrementIn);
         consoleBuilder.addDecrementStreamListener("-", decrementIn);
         consoleBuilder.addResetStreamListener("r", resetIn);
