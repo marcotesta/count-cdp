@@ -55,18 +55,28 @@ public class ConsoleBuilder {
         return new ValueWriter(out, aValueModel);
     }
 
-    private CommandReader makeCommandReaderOn(Object aModel, String anAction,
+    private LineReader makeCommandReaderOn(Object aModel, String anAction,
             String regex, BufferedReader in) {
+        LineReader lineReader = new LineReader(in);
+
+        StringFilter filter = new StringFilter(regex);
         PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction);
-        CommandReader streamListener = new CommandReader(aCommand, in, regex);
+        CommandTrigger commandListener = new CommandTrigger(aCommand);
+        filter.addListener(commandListener);
 
+        lineReader.addListener(commandListener);
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute(streamListener);
+        executor.execute(new Runnable() {
 
-        return streamListener;
+            @Override
+            public void run() {
+                lineReader.readLines();
+            }});
+
+        return lineReader;
     }
 
-    private boolean add(CommandReader makeStreamListener) {
+    private boolean add(LineReader makeStreamListener) {
         return components.add(makeStreamListener);
     }
 }
