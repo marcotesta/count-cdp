@@ -57,14 +57,16 @@ public class ConsoleBuilder {
 
     private LineReader makeCommandReaderOn(Object aModel, String anAction,
             String regex, BufferedReader in) {
-        LineReader lineReader = new LineReader(in);
 
-        StringFilter filter = new StringFilter(regex);
         PluggableAdaptor aCommand = new PluggableAdaptor(aModel, anAction);
         CommandTrigger commandListener = new CommandTrigger(aCommand);
+
+        StringFilter filter = new StringFilter(regex);
         filter.addListener(commandListener);
 
-        lineReader.addListener(commandListener);
+        LineReader lineReader = new LineReader(in);
+        lineReader.addListener(filter);
+
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(new Runnable() {
 
