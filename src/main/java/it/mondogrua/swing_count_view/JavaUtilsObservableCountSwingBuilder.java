@@ -21,8 +21,9 @@ public class JavaUtilsObservableCountSwingBuilder extends CountSwingBuilder {
     public void addDisplayBoxOn(int x, int y) {
         JLabel label = new JLabel();
         JavaUtilsObserverJLabelAdapter jLableAdapter = makeJLableAdapter(label);
-        JavaUtilsObservableValueModel valueModel = new JavaUtilsObservableValueModel(count,
-                new ValueModelAdaptor(count, Count.GET_VALUE_METHOD));
+        JavaUtilsObservableValueModel valueModel =
+                new JavaUtilsObservableValueModel(count, new ValueModelAdaptor(
+                        count, Count.GET_VALUE_METHOD));
         jLableAdapter.bind(valueModel);
         add(label, x, y);
     }

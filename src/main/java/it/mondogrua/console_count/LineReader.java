@@ -8,7 +8,8 @@ import java.util.List;
 public class LineReader {
 
     private BufferedReader reader;
-    private final List<StringListener> listeners = new ArrayList<StringListener>();
+    private final List<StringListener> listeners =
+            new ArrayList<StringListener>();
 
     public LineReader(BufferedReader scanner) {
         super();
@@ -37,7 +38,7 @@ public class LineReader {
     }
 
     private void notifyListeners(String c) {
-        for (StringListener listener: listeners) {
+        for (StringListener listener : listeners) {
             listener.update(c);
         }
     }

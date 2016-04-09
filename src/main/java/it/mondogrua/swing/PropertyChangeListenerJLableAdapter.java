@@ -8,7 +8,8 @@ import javax.swing.SwingUtilities;
 
 import it.mondogrua.utils.ValueModel;
 
-public class PropertyChangeListenerJLableAdapter implements PropertyChangeListener {
+public class PropertyChangeListenerJLableAdapter implements
+        PropertyChangeListener {
 
     private JLabel label;
     private ValueModel valueModel;

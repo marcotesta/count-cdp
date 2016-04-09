@@ -5,7 +5,8 @@ import java.util.List;
 
 public class StringFilter implements StringListener {
 
-    private final List<StringListener> listeners = new ArrayList<StringListener>();
+    private final List<StringListener> listeners =
+            new ArrayList<StringListener>();
 
     private String regex;
 
@@ -26,7 +27,7 @@ public class StringFilter implements StringListener {
     }
 
     private void notifyListeners(String c) {
-        for (StringListener listener: listeners) {
+        for (StringListener listener : listeners) {
             listener.update(c);
         }
     }

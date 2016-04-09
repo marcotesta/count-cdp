@@ -1,6 +1,5 @@
 package it.mondogrua.utils;
 
-
 import java.io.IOException;
 import java.io.PipedReader;
 import java.io.PipedWriter;
@@ -74,4 +73,3 @@ public class ReaderSplitter {
         }
     }
 }
-

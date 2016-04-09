@@ -43,7 +43,8 @@ public class CountApp extends Application {
         JavaUtilsObservableCount javaUtilsObservableCount =
                 createJavaUtilsObservableCount(count);
         JavaUtilsObservableCountSwingBuilder javaUtilsObservableCountSwingBuilder =
-                new JavaUtilsObservableCountSwingBuilder(javaUtilsObservableCount);
+                new JavaUtilsObservableCountSwingBuilder(
+                        javaUtilsObservableCount);
         setupStage(new Stage(), "SWING DateCount Example",
                 javaUtilsObservableCountSwingBuilder, 900, 500);
 
@@ -58,21 +59,26 @@ public class CountApp extends Application {
         SimpleStringPropertyCount simpleStringPropertyCount =
                 createSimpleStringPropertyCount(count);
         JFXBuilder jfxBuilder = new JFXBuilder(simpleStringPropertyCount);
-        setupStage(primaryStage, "JavaFX DateCount Example", jfxBuilder, 100, 500);
-        AltJFXBuilder altJFXBuilder = new AltJFXBuilder(simpleStringPropertyCount);
-        setupStage(new Stage(), "Alternative JavaFX DateCount Example", altJFXBuilder, 500, 500);
+        setupStage(primaryStage, "JavaFX DateCount Example", jfxBuilder, 100,
+                500);
+        AltJFXBuilder altJFXBuilder = new AltJFXBuilder(
+                simpleStringPropertyCount);
+        setupStage(new Stage(), "Alternative JavaFX DateCount Example",
+                altJFXBuilder, 500, 500);
 
         //
         setupConsole(count);
     }
 
-    private SimpleStringPropertyCount createSimpleStringPropertyCount(ObservableCount count) {
+    private SimpleStringPropertyCount createSimpleStringPropertyCount(
+            ObservableCount count) {
         SimpleStringPropertyToMgObserverObservableAdapter simpleStringPropertyObsObsAdapter =
                 new SimpleStringPropertyToMgObserverObservableAdapter(
                         new ValueModelAdaptor(count, Count.GET_VALUE_METHOD));
         count.addObserver(simpleStringPropertyObsObsAdapter);
         SimpleStringPropertyCount simpleStringPropertyCount =
-                SimpleStringPropertyCount.create(simpleStringPropertyObsObsAdapter, count);
+                SimpleStringPropertyCount.create(
+                        simpleStringPropertyObsObsAdapter, count);
         return simpleStringPropertyCount;
     }
 
@@ -85,7 +91,8 @@ public class CountApp extends Application {
         return boundPropertyCount;
     }
 
-    private JavaUtilsObservableCount createJavaUtilsObservableCount(ObservableCount count) {
+    private JavaUtilsObservableCount createJavaUtilsObservableCount(
+            ObservableCount count) {
         JavaUtilsToMgObserverObservableAdapter javaUtilsObsObsAdapter =
                 new JavaUtilsToMgObserverObservableAdapter();
         count.addObserver(javaUtilsObsObsAdapter);
@@ -94,17 +101,19 @@ public class CountApp extends Application {
         return javaUtilsObservableCount;
     }
 
-    private void setupConsole(ObservableCount count) throws FileNotFoundException, IOException {
-        BufferedReader fileReader = new BufferedReader(new FileReader("count-input.txt"));
+    private void setupConsole(ObservableCount count)
+            throws FileNotFoundException, IOException {
+        BufferedReader fileReader = new BufferedReader(new FileReader(
+                "count-input.txt"));
         Reader systemInput = new InputStreamReader(System.in);
-        ReaderSplitter streamSplitter = new ReaderSplitter(
-                systemInput);
+        ReaderSplitter streamSplitter = new ReaderSplitter(systemInput);
         BufferedReader incrementIn = new BufferedReader(streamSplitter.split());
         BufferedReader decrementIn = new BufferedReader(streamSplitter.split());
         BufferedReader resetIn = new BufferedReader(streamSplitter.split());
         streamSplitter.start();
 
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+                System.out));
 
         ConsoleBuilder consoleBuilder = new ConsoleBuilder(count);
         consoleBuilder.addIncrementStreamListener("+", fileReader);
