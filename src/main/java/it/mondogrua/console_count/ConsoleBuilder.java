@@ -6,8 +6,6 @@ import static it.mondogrua.count.Count.RESET_METHOD;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -20,7 +18,6 @@ import it.mondogrua.utils.ValueModelAdaptor;
 
 public class ConsoleBuilder {
 
-    private List<Object> components = new ArrayList<Object>();
     private ObservableCount count;
 
     public ConsoleBuilder(ObservableCount aCount) {
@@ -29,15 +26,15 @@ public class ConsoleBuilder {
     }
 
     public void addResetStreamListener(String regex, BufferedReader in) {
-        add(makeCommandReaderOn(count, RESET_METHOD, regex, in));
+        makeCommandReaderOn(count, RESET_METHOD, regex, in);
     }
 
     public void addIncrementStreamListener(String regex, BufferedReader in) {
-        add(makeCommandReaderOn(count, INCREMENT_METHOD, regex, in));
+        makeCommandReaderOn(count, INCREMENT_METHOD, regex, in);
     }
 
     public void addDecrementStreamListener(String regex, BufferedReader in) {
-        add(makeCommandReaderOn(count, DECREMENT_METHOD, regex, in));
+        makeCommandReaderOn(count, DECREMENT_METHOD, regex, in);
     }
 
     public void addDisplayStream(BufferedWriter out) {
@@ -46,7 +43,6 @@ public class ConsoleBuilder {
 
         count.addObserver(new ObserverAdaptor(displayStream,
                 ValueWriter.PRINT_VALUE_METHOD));
-        components.add(displayStream);
     }
 
     private ValueWriter makeDisplayWriter(BufferedWriter out, Object aModel,
@@ -77,9 +73,5 @@ public class ConsoleBuilder {
         });
 
         return commandReader;
-    }
-
-    private boolean add(LineReader makeStreamListener) {
-        return components.add(makeStreamListener);
     }
 }
