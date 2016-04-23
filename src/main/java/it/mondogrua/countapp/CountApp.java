@@ -3,6 +3,7 @@ package it.mondogrua.countapp;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,6 +26,7 @@ import it.mondogrua.utils.JavaUtilsToMgObserverObservableAdapter;
 import it.mondogrua.utils.ReaderSplitter;
 import it.mondogrua.utils.SimpleStringPropertyToMgObserverObservableAdapter;
 import it.mondogrua.utils.ValueModelAdaptor;
+import it.mondogrua.utils.WriterSplitter;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -105,8 +107,12 @@ public class CountApp extends Application {
     private void constructConsole(ConsoleBuilder consoleBuilder)
             throws FileNotFoundException, IOException {
 
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+        BufferedWriter streamWriter = new BufferedWriter(new OutputStreamWriter(
                 System.out));
+        WriterSplitter out = new WriterSplitter(streamWriter);
+        BufferedWriter fileWriter = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream("count-output.txt"), "utf-8"));
+        out.add(fileWriter);
         consoleBuilder.addDisplayStream(out);
 
         BufferedReader fileReader = new BufferedReader(new FileReader(
@@ -115,6 +121,9 @@ public class CountApp extends Application {
 
         Reader systemInput = new InputStreamReader(System.in);
         ReaderSplitter streamSplitter = new ReaderSplitter(systemInput);
+
+        BufferedReader incrementIn = new BufferedReader(streamSplitter.split());
+        consoleBuilder.addIncrementStreamListener("+", incrementIn);
 
         BufferedReader decrementIn = new BufferedReader(streamSplitter.split());
         consoleBuilder.addDecrementStreamListener("-", decrementIn);
