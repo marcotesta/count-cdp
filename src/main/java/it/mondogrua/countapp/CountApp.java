@@ -67,7 +67,8 @@ public class CountApp extends Application {
                 altJFXBuilder, 500, 500);
 
         //
-        setupConsole(count);
+        ConsoleBuilder consoleBuilder = new ConsoleBuilder(count);
+        constructConsole(consoleBuilder);
     }
 
     private SimpleStringPropertyCount createSimpleStringPropertyCount(
@@ -101,26 +102,27 @@ public class CountApp extends Application {
         return javaUtilsObservableCount;
     }
 
-    private void setupConsole(ObservableCount count)
+    private void constructConsole(ConsoleBuilder consoleBuilder)
             throws FileNotFoundException, IOException {
-        BufferedReader fileReader = new BufferedReader(new FileReader(
-                "count-input.txt"));
-        Reader systemInput = new InputStreamReader(System.in);
-        ReaderSplitter streamSplitter = new ReaderSplitter(systemInput);
-        BufferedReader incrementIn = new BufferedReader(streamSplitter.split());
-        BufferedReader decrementIn = new BufferedReader(streamSplitter.split());
-        BufferedReader resetIn = new BufferedReader(streamSplitter.split());
-        streamSplitter.start();
 
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
                 System.out));
-
-        ConsoleBuilder consoleBuilder = new ConsoleBuilder(count);
-        consoleBuilder.addIncrementStreamListener("+", fileReader);
-        consoleBuilder.addIncrementStreamListener("+", incrementIn);
-        consoleBuilder.addDecrementStreamListener("-", decrementIn);
-        consoleBuilder.addResetStreamListener("r", resetIn);
         consoleBuilder.addDisplayStream(out);
+
+        BufferedReader fileReader = new BufferedReader(new FileReader(
+                "count-input.txt"));
+        consoleBuilder.addIncrementStreamListener("+", fileReader);
+
+        Reader systemInput = new InputStreamReader(System.in);
+        ReaderSplitter streamSplitter = new ReaderSplitter(systemInput);
+
+        BufferedReader decrementIn = new BufferedReader(streamSplitter.split());
+        consoleBuilder.addDecrementStreamListener("-", decrementIn);
+
+        BufferedReader resetIn = new BufferedReader(streamSplitter.split());
+        consoleBuilder.addResetStreamListener("r", resetIn);
+
+        streamSplitter.start();
     }
 
     private void setupStage(Stage stage, String lable, SceneBuilder builder,
