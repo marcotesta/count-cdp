@@ -72,7 +72,7 @@ public class ConsoleBuilder {
 
             @Override
             public void run() {
-                commandReader.readLines();
+                commandReader.tail();
             }
         });
 

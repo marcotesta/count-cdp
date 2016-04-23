@@ -7,29 +7,42 @@ import java.util.List;
 
 public class LineReader {
 
+    private static final int DEFAULT_RETRY_DELAY = 1000;
+
     private BufferedReader reader;
     private final List<StringListener> listeners =
             new ArrayList<StringListener>();
+    private volatile boolean run = true;
 
     public LineReader(BufferedReader scanner) {
         super();
         this.reader = scanner;
     }
 
-    public void readLines() {
+    public void tail() {
 
         try {
-            String c;
-            while ((c = reader.readLine()) != null) {
-                notifyListeners(c);
+            while (run) {
+                readLines();
+                Thread.sleep(DEFAULT_RETRY_DELAY);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
             try {
                 reader.close();
             } catch (IOException e) {
             }
+        }
+    }
+
+    private void readLines() throws IOException {
+        while (run) {
+            String string = reader.readLine();
+            if (string == null) {
+                break;
+            }
+            notifyListeners(string);
         }
     }
 
