@@ -110,9 +110,6 @@ public class CountApp extends Application {
         BufferedWriter sysoutWriter = new BufferedWriter(new OutputStreamWriter(
                 System.out));
         WriterSplitter out = new WriterSplitter(sysoutWriter);
-        // BufferedWriter fileWriter = new BufferedWriter(new
-        // OutputStreamWriter(
-        // new FileOutputStream("count.txt"), "utf-8"));
         BufferedWriter fileWriter = new BufferedWriter(new EOFWriter(
                 "count.txt"));
         out.add(fileWriter);
