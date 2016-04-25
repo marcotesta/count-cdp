@@ -38,17 +38,17 @@ public class ConsoleBuilder {
     }
 
     public void addDisplayStream(BufferedWriter out) {
-        ValueWriter displayStream = makeDisplayWriter(out, count,
+        ValuePrinter displayStream = makeDisplayWriter(out, count,
                 Count.GET_VALUE_METHOD);
 
         count.addObserver(new ObserverAdaptor(displayStream,
-                ValueWriter.PRINT_VALUE_METHOD));
+                ValuePrinter.PRINT_VALUE_METHOD));
     }
 
-    private ValueWriter makeDisplayWriter(BufferedWriter out, Object aModel,
+    private ValuePrinter makeDisplayWriter(BufferedWriter out, Object aModel,
             String action) {
         ValueModel aValueModel = new ValueModelAdaptor(aModel, action);
-        return new ValueWriter(out, aValueModel);
+        return new ValuePrinter(out, aValueModel);
     }
 
     private LineReader makeCommandReaderOn(Object aModel, String anAction,

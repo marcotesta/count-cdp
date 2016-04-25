@@ -5,14 +5,14 @@ import java.io.IOException;
 
 import it.mondogrua.utils.ValueModel;
 
-public class ValueWriter {
+public class ValuePrinter {
 
     public static final String PRINT_VALUE_METHOD = "printValue";
 
     private BufferedWriter out;
     private ValueModel valueModel;
 
-    public ValueWriter(BufferedWriter out, ValueModel aValueModel) {
+    public ValuePrinter(BufferedWriter out, ValueModel aValueModel) {
         this.out = out;
         this.valueModel = aValueModel;
         printValue();

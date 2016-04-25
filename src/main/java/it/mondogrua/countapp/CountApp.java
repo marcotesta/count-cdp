@@ -3,7 +3,6 @@ package it.mondogrua.countapp;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,6 +21,7 @@ import it.mondogrua.swing_count_view.BoundPropertyCountSwingBuilder;
 import it.mondogrua.swing_count_view.JavaUtilsObservableCount;
 import it.mondogrua.swing_count_view.JavaUtilsObservableCountSwingBuilder;
 import it.mondogrua.utils.BoundPropertyToMgObserverObservableAdapter;
+import it.mondogrua.utils.EOFWriter;
 import it.mondogrua.utils.JavaUtilsToMgObserverObservableAdapter;
 import it.mondogrua.utils.ReaderSplitter;
 import it.mondogrua.utils.SimpleStringPropertyToMgObserverObservableAdapter;
@@ -107,16 +107,19 @@ public class CountApp extends Application {
     private void constructConsole(ConsoleBuilder consoleBuilder)
             throws FileNotFoundException, IOException {
 
-        BufferedWriter streamWriter = new BufferedWriter(new OutputStreamWriter(
+        BufferedWriter sysoutWriter = new BufferedWriter(new OutputStreamWriter(
                 System.out));
-        WriterSplitter out = new WriterSplitter(streamWriter);
-        BufferedWriter fileWriter = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream("count-output.txt"), "utf-8"));
+        WriterSplitter out = new WriterSplitter(sysoutWriter);
+        // BufferedWriter fileWriter = new BufferedWriter(new
+        // OutputStreamWriter(
+        // new FileOutputStream("count.txt"), "utf-8"));
+        BufferedWriter fileWriter = new BufferedWriter(new EOFWriter(
+                "count.txt"));
         out.add(fileWriter);
         consoleBuilder.addDisplayStream(out);
 
         BufferedReader fileReader = new BufferedReader(new FileReader(
-                "count-input.txt"));
+                "count.txt"));
         consoleBuilder.addIncrementStreamListener("+", fileReader);
 
         Reader systemInput = new InputStreamReader(System.in);
