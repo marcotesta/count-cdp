@@ -8,6 +8,6 @@ public class ObserverAdaptor extends PluggableAdaptor implements Observer {
 
     @Override
     public void update() {
-        execute().toString();
+        execute();
     }
 }
